@@ -13,7 +13,7 @@ class Syn:
     def _generate_vertical(sentence: str) -> str:
         words = sentence.split() # TODO tokenize sentence
 
-        with open("sentence_input.txt", "w") as f:
+        with open("tmp/sentence_input.txt", "w") as f:
             for word in words:
                 f.write(word)
                 f.write('\t')
