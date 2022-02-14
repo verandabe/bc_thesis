@@ -4,15 +4,12 @@ class Protagonist:
 
     def __init__(self, name: str):
         self.name = name
-        self.forms = _try_generate_forms()
+        self.forms = self._try_generate_forms()
 
 
     def _try_generate_forms(self):
-        generated = Morph.get_wt(name)
-        :x
-
-
-
+        generated = Morph.get_wt(self.name)
+        if generated:
             return generated
 
         return self.load_own_forms()
@@ -23,7 +20,7 @@ class Protagonist:
         # file ve formatu: ```lemma tag\n```
 
         if file_name is None:
-            return self._create_forms():
+            return self._create_forms()
 
         forms = []
         with open(file_name, "r") as df:
@@ -36,14 +33,14 @@ class Protagonist:
 
 
     def _create_forms(self):
-        gender = None
+        gender = "g"
         while gender not in "fFmMnN":
-            gender = upper(input("Protagonist's gender: (F/M/N)"))
+            gender = input("Protagonist's gender (F/M/N):  ").upper()
 
         declined_forms = []
         tag = "k1g{gender}nSc{case}"
         for i in range(1, 8):
-            word_form = input("Form in {case}. case".format(case=i)
+            word_form = input("Form in {case}. case:  ".format(case=i))
             declined_forms.append((word_form, tag.format(gender=gender, case=i)))
 
         return declined_forms

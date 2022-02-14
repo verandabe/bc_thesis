@@ -10,3 +10,13 @@ from Forms import Form
 rerich = RephrasErIch(Form.ER)
 rerich.rephrase("lalala")
 '''
+
+from Protagonist import Protagonist
+protg = Protagonist("Helena")
+print(protg.name)
+print(protg.forms)
+
+protg = Protagonist("Meda")
+print(protg.name)
+print(protg.forms)
+
