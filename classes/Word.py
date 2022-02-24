@@ -1,8 +1,11 @@
-# from tools.morph import Morph # TODO path
-# from enums.Member import Member
+from morph import Morph
+from Member import Member
 from typing import List
 
 class Word:
+    """
+    Class representing a word.
+    """
 
     def __init__(self, string: str, member, dependers, anaphor, ds: bool):
         self.word = string
@@ -14,7 +17,6 @@ class Word:
         self.anaphor = anaphor
         self.direct_speech = ds
 
-
-    def generate_new_form(self) -> str: # TODO
+    def generate_new_form(self) -> str:  # TODO
         return self.word
 

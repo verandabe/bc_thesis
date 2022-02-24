@@ -3,6 +3,9 @@ from typing import List
 from Paragraph import Paragraph
 
 class Text:
+    """
+    Class representing the text to be rephrased.
+    """
 
     def __init__(self, text: str, form):
         self.text = text
