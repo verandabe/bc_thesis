@@ -1,6 +1,7 @@
 from Text import Text
 from Protagonist import Protagonist
 from Forms import Form
+from utils import postprocess
 
 class RephrasErIch:
     """
@@ -17,15 +18,26 @@ class RephrasErIch:
         :param text: text to be converted
         :return: rephrased text
         """
-        self.text = Text(text, self.form)
 
-        if self.form == Form.ICH:
-            self._ich_to_er()
-        else:
-            if self.protg is None:
-                print("Missing protagonist")
-                return
-            self._er_to_ich()
+        if self.form == Form.ER and self.protg is None:
+            print("Missing protagonist. Create protagonist first.")
+            return
+
+        self.text = Text(text, self.form, self.protg)
+
+        rephrased_list = []
+        for p in self.text.paragraphs:
+            rephrased_par = []
+            for s in p.sentences:
+                s.rephrase(self.form)
+                for w in s.words:
+                    if w.is_real_word():
+                        rephrased_par.append(w.new_form)
+            rephrased_list.append(" ".join(rephrased_par))
+
+        rephrased_list = postprocess(rephrased_list)
+        rephrased_text = "\n".join(rephrased_list)
+        return rephrased_text
 
     def set_form(self, from_form: Form):
         self.form = from_form
@@ -33,18 +45,3 @@ class RephrasErIch:
     def create_protagonist(self, name: str):
         self.protg = Protagonist(name)
 
-    def _ich_to_er(self):
-        """
-        Convert the text from first person to third person.
-        """
-        pass
-
-    def _er_to_ich(self):
-        """
-        Convert the text from third person to first person.
-        """
-        pass
-
-
-rerich = RephrasErIch(Form.ICH)
-rerich.rephrase("Jsem princezna")

@@ -46,7 +46,7 @@ class Syn:
         :param sentence: string, sentence to be analyzed
         :return: list of words with metadata in form [index, word, dependency index, dep/phr, member type]
         """
-        vertical_input_filename = cls._generate_vertical(sentence)
+        vertical_input_filename = cls._generate_vertical(sentence) # TODO generate by SET
         output = os.popen(cls.command.format(options="", filename=vertical_input_filename))
         sentence = output.read()
         nodes: List[List[str]] = [node.split('\t') for node in sentence.split('\n')][:-1]

@@ -1,5 +1,7 @@
 from typing import List, Dict
 from Word import Word
+from Protagonist import Protagonist
+from Forms import Form
 from syn import Syn
 
 
@@ -8,11 +10,12 @@ class Sentence:
     Class object representing a sentence
     """
 
-    def __init__(self, sentence: str, anaphors: Dict[str, str]):
+    def __init__(self, sentence: str, anaphors: Dict[str, str], protg: Protagonist):
         self.nodes = Syn.get_sentence_nodes(sentence)
         self.anaphors = anaphors
         self.words = self._create_words_objects()
         self.root = self._find_root()
+        self.protg = protg
         # self.resolved_subject = ?
 
     def _create_words_objects(self) -> List[Word]:
@@ -21,8 +24,14 @@ class Sentence:
         """
         words = []
         for node in self.nodes:
-            _, word_form, _, _, member = node
-            word = Word(word_form, member, [], self.anaphors[word_form], False)  # TODO direct speech, anaphors
+            index, word_form, parent_idx, _, member = node
+            word = Word(int(index),
+                        word_form,
+                        member,
+                        int(parent_idx),
+                        [],
+                        {},# TODO self.anaphors[word_form],
+                        False)  # TODO direct speech, anaphors
             words.append(word)
         self._add_dependencies(words)
         return words
@@ -32,13 +41,16 @@ class Sentence:
         Takes the undone list of Word objects and updates it by adding dependending Word objects to dependencies.
         """
         for i, node in enumerate(self.nodes):
-            dep_idx = node[2]
-            words[dep_idx].dependencies.append(words[i])
+            dep_idx = int(node[2])
+            words[dep_idx].dependents.append(words[i])
 
     def _find_root(self) -> Word:
         """
         Method takes the Word objects list and finds the root of sentence tree.
         """
         for word in self.words:
-            if not word.dependencies:
+            if word.parent_idx == -1:
                 return word
+
+    def rephrase(self, form: Form):
+        pass
