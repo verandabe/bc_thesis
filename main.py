@@ -15,8 +15,3 @@ from Protagonist import Protagonist
 protg = Protagonist("Helena")
 print(protg.name)
 print(protg.forms)
-
-protg = Protagonist("Meda")
-print(protg.name)
-print(protg.forms)
-
