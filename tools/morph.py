@@ -43,11 +43,20 @@ class Morph:
 
     @classmethod
     def get_lemma(cls, word: str) -> str:
+        # TODO vracet vsechny?
         lts = cls.get_lt(word)
         if not lts:
             return word
         lemma, _ = lts[0]
         return lemma
+
+    @classmethod
+    def get_lemmas(cls, word: str) -> List[str]:  # alternativa kdyby se vracely vsechny
+        lts = cls.get_lt(word)
+        if not lts:
+            return [word]
+        lemmas = [lt[0] for lt in lts]
+        return lemmas
 
     @classmethod
     def get_tag(cls, word: str) -> str:
@@ -57,7 +66,15 @@ class Morph:
             return tag
 
     @classmethod
-    def get_word(cls, lemma: str, tag: str) -> List[str]:
+    def get_tags(cls, word: str) -> str:  # podobna alternativa pro tagy
+        lts = cls.get_lt(word)
+        if not lts:
+            return
+        tags = [lt[1] for lt in lts]
+        return tags
+
+    @classmethod
+    def get_words(cls, lemma: str, tag: str) -> List[str]:
         """
         Generates a word forms according to given lemma and tag.
         """

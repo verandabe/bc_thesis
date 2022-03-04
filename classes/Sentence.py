@@ -16,6 +16,7 @@ class Sentence:
         self.words = self._create_words_objects()
         self.root = self._find_root()
         self.protg = protg
+        # self._add_parents()
         # self.resolved_subject = ?
 
     def _create_words_objects(self) -> List[Word]:
@@ -34,6 +35,7 @@ class Sentence:
                         False)  # TODO direct speech, anaphors
             words.append(word)
         self._add_dependencies(words)
+
         return words
 
     def _add_dependencies(self, words: List[Word]) -> None:
@@ -43,6 +45,14 @@ class Sentence:
         for i, node in enumerate(self.nodes):
             dep_idx = int(node[2])
             words[dep_idx].dependents.append(words[i])
+
+    '''
+    def _add_parents(self) -> None:
+        for word in self.words:
+            if word.parent_idx == -1:
+                continue
+            word.parent_node = self.words[word.parent_idx]
+    '''
 
     def _find_root(self) -> Word:
         """

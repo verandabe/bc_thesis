@@ -1,4 +1,5 @@
 from morph import Morph
+from Genders import Gender
 
 class Protagonist:
     """
@@ -8,6 +9,7 @@ class Protagonist:
     def __init__(self, name: str):
         self.name = name
         self.forms = self._try_generate_forms()
+        self.gender = self._get_gender()
 
     def _try_generate_forms(self):
         """
@@ -56,6 +58,14 @@ class Protagonist:
             declined_forms.append((word_form, tag.format(gender=gender, case=i)))
 
         return declined_forms
+
+    def _get_gender(self):
+        for form in self.forms:
+            tag = form[1]
+            for letter_index in range(0, len(tag), 2):
+                if tag[letter_index] == "g":
+                    return Gender(tag[letter_index+1])
+        return Gender.MASC  # default gender i guess
 
 
 
