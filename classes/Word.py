@@ -34,14 +34,24 @@ class Word:
         elif form == Form.ER:
             pass
 
-
     def is_real_word(self) -> bool:
         return "<" not in self.word
 
     def _ich_to_er(self, protg: Protagonist):
-        for i in range(len(self.lemmas)):
-            if (self.lemmas[i] == "já" or self.lemmas[i] == "můj") and "p1" in self.tags[i]:
-                self.new_form = icher_rule_replace_me_forms(self.tags[i], self.member, protg)
+
+        if self.member == Member.pred:
+            self.new_form = icher_rule_replace_predicates(self)
+        elif self.member == Member.auxiliary_verb:
+            pass
+        else:
+            for i in range(len(self.lemmas)):
+                if self.lemmas[i] == "já" and "p1" in self.tags[i]:
+                    self.new_form = icher_rule_replace_me_forms(self.tags[i], self.member, protg)
+                    return
+                elif self.lemmas[i] == "můj" and "p1" in self.tags[i]:
+                    self.new_form = icher_rule_replace_mine_forms(self.tags[i], protg)
+                    return
+
 
 
 

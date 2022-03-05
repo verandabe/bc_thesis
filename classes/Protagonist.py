@@ -1,5 +1,6 @@
 from morph import Morph
 from Genders import Gender
+from utils import *
 
 class Protagonist:
     """
@@ -18,7 +19,7 @@ class Protagonist:
         """
         generated = Morph.get_wt(self.name)
         if generated:
-            return generated
+            return list(filter(lambda f: "nS" in f[1], generated))
 
         return self.load_own_forms()
 
@@ -62,9 +63,8 @@ class Protagonist:
     def _get_gender(self):
         for form in self.forms:
             tag = form[1]
-            for letter_index in range(0, len(tag), 2):
-                if tag[letter_index] == "g":
-                    return Gender(tag[letter_index+1])
+            g = get_tag_part(tag, "g")
+            return Gender(g)
         return Gender.MASC  # default gender i guess
 
 

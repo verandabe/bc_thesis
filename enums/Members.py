@@ -8,7 +8,7 @@ class Member(Enum):
     coord = '<coord>'
 
     # not as described members
-    verb = 'verb'
+    pred = 'pred'
     other = 'other'
 
     # as described members

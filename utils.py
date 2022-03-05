@@ -7,5 +7,11 @@ def sentence_segment(text: str) -> List[str]:
     return re.findall(sen_seps, text)
 
 
+def get_tag_part(tag: str, category: str) -> str:
+    for letter_idx in range(0, len(tag), 2):
+        if tag[letter_idx] == category:
+            return tag[letter_idx + 1]
+
+
 def postprocess(rephrased: list):
     return rephrased  # TODO

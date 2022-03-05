@@ -51,3 +51,4 @@ class Syn:
         sentence = output.read()
         nodes: List[List[str]] = [node.split('\t') for node in sentence.split('\n')][:-1]
         return nodes
+

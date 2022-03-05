@@ -33,6 +33,8 @@ class Sentence:
                         [],
                         {},# TODO self.anaphors[word_form],
                         False)  # TODO direct speech, anaphors
+            if self._is_word_predicate(word_form, member):
+                member = Member.pred
             words.append(word)
         self._add_dependencies(words)
 
@@ -61,6 +63,12 @@ class Sentence:
         for word in self.words:
             if word.parent_idx == -1:
                 return word
+
+    def _is_word_predicate(self, word_form: str, member):
+        if len(member) > 0:
+            return False
+        tag = Morph.get_tag(word_form)
+        return word_form[1] == "5"
 
     def rephrase(self, form: Form):
         pass
