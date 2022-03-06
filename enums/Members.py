@@ -9,6 +9,7 @@ class Member(Enum):
 
     # not as described members
     pred = 'pred'
+    y = 'y' # kdyby, aby
     other = 'other'
 
     # as described members
@@ -21,4 +22,8 @@ class Member(Enum):
     adverb = 'adverb'
     additional_prep = 'additional-prep'
     prep_object = 'prep-object'
+
+    @classmethod
+    def has_value(cls, value):
+        return value in cls._value2member_map_
 

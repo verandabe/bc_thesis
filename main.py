@@ -14,10 +14,11 @@ from Members import Member
 
 rerich = RephrasErIch(Form.ICH)
 
-pokus = Word(1, "kreslil", 'pred', 2, [], {}, False)
-pokus.member = Member.pred
+pokus = Word(1, "jsem", 'auxiliary-verb', 2, [], {}, False)
+pokus.member = Member.auxiliary_verb
 pokus.generate_new_form(Form.ICH, Protagonist("Pavel"))
 print(pokus.new_form)
 pokus.generate_new_form(Form.ICH, Protagonist("Marie"))
 print(pokus.new_form)
+
 

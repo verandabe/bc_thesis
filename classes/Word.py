@@ -41,8 +41,8 @@ class Word:
 
         if self.member == Member.pred:
             self.new_form = icher_rule_replace_predicates(self)
-        elif self.member == Member.auxiliary_verb:
-            pass
+        elif self.member == Member.auxiliary_verb or self.member == Member.y:
+            self.new_form = icher_rule_replace_delete_auxverb(self)
         else:
             for i in range(len(self.lemmas)):
                 if self.lemmas[i] == "já" and "p1" in self.tags[i]:

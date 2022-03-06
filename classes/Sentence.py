@@ -3,6 +3,7 @@ from Word import Word
 from Protagonist import Protagonist
 from Forms import Form
 from syn import Syn
+from Members import Member
 
 
 class Sentence:
@@ -16,7 +17,7 @@ class Sentence:
         self.words = self._create_words_objects()
         self.root = self._find_root()
         self.protg = protg
-        # self._add_parents()
+        self._add_parents()
         # self.resolved_subject = ?
 
     def _create_words_objects(self) -> List[Word]:
@@ -28,13 +29,11 @@ class Sentence:
             index, word_form, parent_idx, _, member = node
             word = Word(int(index),
                         word_form,
-                        member,
+                        self._assign_member(word_form, member),
                         int(parent_idx),
                         [],
                         {},# TODO self.anaphors[word_form],
                         False)  # TODO direct speech, anaphors
-            if self._is_word_predicate(word_form, member):
-                member = Member.pred
             words.append(word)
         self._add_dependencies(words)
 
@@ -48,13 +47,11 @@ class Sentence:
             dep_idx = int(node[2])
             words[dep_idx].dependents.append(words[i])
 
-    '''
     def _add_parents(self) -> None:
         for word in self.words:
             if word.parent_idx == -1:
                 continue
             word.parent_node = self.words[word.parent_idx]
-    '''
 
     def _find_root(self) -> Word:
         """
@@ -64,11 +61,26 @@ class Sentence:
             if word.parent_idx == -1:
                 return word
 
-    def _is_word_predicate(self, word_form: str, member):
+    def _is_word_predicate(self, word_form: str, member) -> bool:
         if len(member) > 0:
             return False
         tag = Morph.get_tag(word_form)
-        return word_form[1] == "5"
+        return tag[1] == "5"
+
+    def _is_word_cond(self, word_form: str, member) -> bool:
+        if len(member) > 0:
+            return False
+        lemma = Morph.get_lemma(word_form)
+        return lemma == "kdyby" or lemma == "aby"
+
+    def _assign_member(self, word_form: str, member_input: str) -> Member:
+        if self._is_word_predicate(word_form, member_input):
+            return Member.pred
+        if self._is_word_cond(word_form, member_input):
+            return Member.y
+        if Member.has_value(member_input):
+            return Member(member_input)
+        return Member.other
 
     def rephrase(self, form: Form):
         pass
