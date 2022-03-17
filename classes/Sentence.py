@@ -89,12 +89,18 @@ class Sentence:
     def rephrase(self, form: Form):
         # TODO add protagonist as subject in ichtoer
         new_forms = []
+        first = True
         for word in self.words:
             if word.is_real_word():
                 if form == Form.ICH:
                     word.ich_to_er(self.protg)
                 elif form == Form.ER:
                     pass  # TODO
+
+                if first:
+                    word.new_form = word.new_form[0].upper() + word.new_form[1:]
+                    first = False
+
                 new_forms.append(word.new_form)
 
         self.new_sentence = " ".join(new_forms)
