@@ -1,7 +1,9 @@
-from Text import Text
-from Protagonist import Protagonist
 from Forms import Form
 from utils import postprocess
+
+from Protagonist import Protagonist
+from Text import Text
+
 
 class RephrasErIch:
     """
@@ -21,7 +23,7 @@ class RephrasErIch:
 
         if self.form == Form.ER and self.protg is None:
             print("Missing protagonist. Create protagonist first.")
-            return
+            return text
 
         self.text = Text(text, self.form, self.protg)
 

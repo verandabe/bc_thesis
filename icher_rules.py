@@ -1,8 +1,10 @@
-from morph import Morph
+from random import random
+
+from Genders import Gender
 from Members import Member
 from Protagonist import Protagonist
-from Genders import Gender
-from random import random
+from morph import Morph
+
 from utils import *
 
 PROTG_NAME_USAGE_PROBABILITY = 0.7
@@ -33,25 +35,24 @@ def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
 
 
 def icher_rule_replace_predicates(word):
-        for i, tag in enumerate(word.tags):
-            # present or future indicative form
-            if "p1" in tag and ("mI" in tag or "mB" in tag):
-                new_tag = tag.replace("p1", "p3")
-                new_form = Morph.get_words(word.lemmas[i], new_tag)[0]  # todo?
-                return new_form
-        # other cases
-        return word.word
+    tag = word.tag
+    if "p1" in tag and ("mI" in tag or "mB" in tag):
+        new_tag = tag.replace("p1", "p3")
+        new_form = Morph.get_words(word.lemma, new_tag)[0]  # todo?
+        return new_form
+    # other cases
+    return word.word
 
 def icher_rule_replace_delete_auxverb(word):
-    for i, tag in enumerate(word.tags):
-        if tag[1] == "5":
-            if "p1" not in tag:
-                return word.word
-            if word.parent_node and word.parent_node.member == Member.pred:
-                return ''
-        new_tag = tag.replace("p1", "p3")
-        new_form = Morph.get_words(word.lemmas[i], new_tag)[0]  # todo?
-        return new_form
+    tag = word.tag
+    if tag and "k5" in tag:
+        if "p1" not in tag:
+            return word.word
+        if word.parent_node and word.parent_node.member == Member.pred:
+            return ''
+    new_tag = tag.replace("p1", "p3")
+    new_form = Morph.get_words(word.lemma, new_tag)[0]  # todo?
+    return new_form
 
 def decide_use_name() -> bool:
     rand = random()

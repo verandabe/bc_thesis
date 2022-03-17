@@ -1,10 +1,13 @@
 from typing import List, Dict
-from Word import Word
-from Protagonist import Protagonist
-from Forms import Form
-from syn import Syn
-from Members import Member
+import re
 
+from Forms import Form
+from Members import Member
+from syn import Syn
+from morph import Morph
+
+from Protagonist import Protagonist
+from Word import Word
 
 class Sentence:
     """
@@ -18,6 +21,7 @@ class Sentence:
         self.root = self._find_root()
         self.protg = protg
         self._add_parents()
+        self.new_sentence = sentence
         # self.resolved_subject = ?
 
     def _create_words_objects(self) -> List[Word]:
@@ -32,7 +36,7 @@ class Sentence:
                         self._assign_member(word_form, member),
                         int(parent_idx),
                         [],
-                        {},# TODO self.anaphors[word_form],
+                        {},  # TODO self.anaphors[word_form],
                         False)  # TODO direct speech, anaphors
             words.append(word)
         self._add_dependencies(words)
@@ -65,7 +69,7 @@ class Sentence:
         if len(member) > 0:
             return False
         tag = Morph.get_tag(word_form)
-        return tag[1] == "5"
+        return tag and len(tag) > 1 and tag[1] == "5"
 
     def _is_word_cond(self, word_form: str, member) -> bool:
         if len(member) > 0:
@@ -83,4 +87,18 @@ class Sentence:
         return Member.other
 
     def rephrase(self, form: Form):
-        pass
+        # TODO add protagonist as subject in ichtoer
+        new_forms = []
+        for word in self.words:
+            if word.is_real_word():
+                if form == Form.ICH:
+                    word.ich_to_er(self.protg)
+                elif form == Form.ER:
+                    pass  # TODO
+                new_forms.append(word.new_form)
+
+        self.new_sentence = " ".join(new_forms)
+
+
+
+

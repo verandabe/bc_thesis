@@ -1,7 +1,11 @@
 from typing import List
-from Sentence import Sentence
-from Protagonist import Protagonist
+
 from utils import sentence_segment
+
+from Protagonist import Protagonist
+from Sentence import Sentence
+from Forms import Form
+
 
 class Paragraph:
     """
@@ -13,7 +17,7 @@ class Paragraph:
         self.protg = protg
         self.anaphors = {}  # TODO
         self.sentences = self._create_sentences()
-
+        self.new_paragraph = self.text
 
     def _create_sentences(self) -> List[Sentence]:
         text_sentences = sentence_segment(self.text)

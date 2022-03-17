@@ -1,6 +1,7 @@
-from morph import Morph
 from Genders import Gender
+from morph import Morph
 from utils import *
+
 
 class Protagonist:
     """
@@ -23,7 +24,7 @@ class Protagonist:
 
         return self.load_own_forms()
 
-    def load_own_forms(self, file_name=None): # TODO
+    def load_own_forms(self, file_name=None):  # TODO
         """
         Loads the forms of protagonist's name from a given file in form "lemma tag\n"
         If file_name not given, returns calling of _create_forms method.

@@ -66,7 +66,7 @@ class Morph:
             return tag
 
     @classmethod
-    def get_tags(cls, word: str) -> str:  # podobna alternativa pro tagy
+    def get_tags(cls, word: str):  # podobna alternativa pro tagy
         lts = cls.get_lt(word)
         if not lts:
             return

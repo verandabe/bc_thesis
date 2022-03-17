@@ -9,7 +9,7 @@ class Member(Enum):
 
     # not as described members
     pred = 'pred'
-    y = 'y' # kdyby, aby
+    y = 'y'  # kdyby, aby
     other = 'other'
 
     # as described members
