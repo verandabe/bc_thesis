@@ -7,7 +7,7 @@ from morph import Morph
 
 from utils import *
 
-PROTG_NAME_USAGE_PROBABILITY = 0.7
+PROTG_NAME_USAGE_PROBABILITY = 0.5
 
 def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
     gtag = "g" + protg.gender.name
@@ -15,7 +15,6 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
         case = get_tag_part(tag, "c")
         filtered = list(filter(lambda f: gtag in f[1] and "c" + case in f[1], protg.forms))
         if filtered:
-            print("filtered: ", filtered[0])
             return filtered[0][0]
 
     new_tag = tag.replace("p1", "p3" + gtag)
@@ -55,6 +54,6 @@ def icher_rule_replace_delete_auxverb(word):
     new_form = Morph.get_words(word.lemma, new_tag)[0]  # todo?
     return new_form
 
-def decide_use_name() -> bool:
+def decide_use_name(prob=None) -> bool:
     rand = random()
-    return rand < PROTG_NAME_USAGE_PROBABILITY
+    return rand < (PROTG_NAME_USAGE_PROBABILITY if prob is None else prob)

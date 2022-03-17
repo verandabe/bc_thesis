@@ -1,5 +1,4 @@
 from typing import List, Dict
-import re
 
 from Forms import Form
 from Members import Member
@@ -8,6 +7,7 @@ from morph import Morph
 
 from Protagonist import Protagonist
 from Word import Word
+from icher_rules import *
 
 class Sentence:
     """
@@ -90,21 +90,46 @@ class Sentence:
         # TODO add protagonist as subject in ichtoer
         new_forms = []
         first = True
+        names_considered = True
         for word in self.words:
-            if word.is_real_word():
-                if form == Form.ICH:
-                    word.ich_to_er(self.protg)
-                elif form == Form.ER:
-                    pass  # TODO
+            if not word.is_real_word():
+                continue
+            if form == Form.ICH:
+                word.ich_to_er(self.protg)
+            elif form == Form.ER:
+                pass  # TODO
 
-                if first:
-                    word.new_form = word.new_form[0].upper() + word.new_form[1:]
-                    first = False
+            if first:
+                first = False
+                word.new_form = word.new_form[0].upper() + word.new_form[1:]
 
+            if names_considered:
+                no_consider = self._deal_with_names(word, new_forms, first)
+                if no_consider:
+                    names_considered = False
+            else:
                 new_forms.append(word.new_form)
-
+            print(new_forms)
         self.new_sentence = " ".join(new_forms)
 
+    def _deal_with_names(self, word, new_forms, first) -> bool:
+        add_name_index = self._name_should_be_added(word)
 
+        if add_name_index == -1:
+            new_forms.append(self.protg.name)
+        new_forms.append(word.new_form)
+        if add_name_index == 1:
+            new_forms.append(self.protg.name)
 
+        return add_name_index
 
+    def _name_should_be_added(self, word: Word) -> int:
+        if not decide_use_name(0.5) or not word.tag:
+            return 0
+
+        in_front = "k5" in word.tag
+        if in_front or "kY" in word.tag:
+            if word.word != word.new_form:
+                if self.protg.name not in [word_str for word_str in self.words]:
+                    return -1 if in_front else 1
+        return 0

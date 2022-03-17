@@ -46,10 +46,8 @@ class Word:
         else:
             if self.lemma == "já" and "p1" in self.tag:
                 self.new_form = icher_rule_replace_me_forms(self.tag, self.member, protg)
-                return
             elif self.lemma == "můj" and "p1" in self.tag:
                 self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
-                return
 
 
 

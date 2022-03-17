@@ -32,9 +32,7 @@ class RephrasErIch:
             rephrased_par = []
             for s in p.sentences:
                 s.rephrase(self.form)
-                for w in s.words:
-                    if w.is_real_word():
-                        rephrased_par.append(w.new_form)
+                rephrased_par.append(s.new_sentence)
             rephrased_list.append(" ".join(rephrased_par))
 
         rephrased_list = postprocess(rephrased_list)
