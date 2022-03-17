@@ -15,7 +15,8 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
         case = get_tag_part(tag, "c")
         filtered = list(filter(lambda f: gtag in f[1] and "c" + case in f[1], protg.forms))
         if filtered:
-            return filtered[0]
+            print("filtered: ", filtered[0])
+            return filtered[0][0]
 
     new_tag = tag.replace("p1", "p3" + gtag)
     new_forms = Morph.get_words("on", new_tag)

@@ -17,7 +17,7 @@ rerich = RephrasErIch(Form.ICH)
 
 
 rerich.create_protagonist("Princezna")
-print(rerich.rephrase("Šla jsem na výlet. Vidím tátu, ale radši bych byla, kdybych viděla maminku."))
+print(rerich.rephrase("Šla jsem na výlet. Vidím tátu, jak si hraje s autem. Nelíbí se mi to. Radši bych byla, kdybych viděla maminku."))
 
 
 

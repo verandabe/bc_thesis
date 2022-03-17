@@ -24,7 +24,6 @@ class Morph:
 
         for i in range(0, len(tmp)-1, 2):
             tuples.append((tmp[i], tmp[i+1]))
-
         return tuples
 
     @classmethod
@@ -47,6 +46,7 @@ class Morph:
         lts = cls.get_lt(word)
         if not lts:
             return word
+        print(lts)
         lemma, _ = lts[0]
         return lemma
 
