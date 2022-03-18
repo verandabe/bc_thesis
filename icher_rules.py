@@ -9,6 +9,8 @@ from utils import *
 
 PROTG_NAME_USAGE_PROBABILITY = 0.5
 
+
+# REPLACE PERSONAL PRONOUNS
 def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
     gtag = "g" + protg.gender.name
     if decide_use_name():
@@ -25,7 +27,8 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
     return new_forms[0]
 
 
-def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
+# REPLACE POSSESIVE PRONOUNS
+def icher_rule_replace_mine_forms(tag: str, protg: Protagonist): # TODO opravit
     # new_tag = tag.replace("xOp1", "p3") + "xO"  # kdyz vertical generuje set (taguje ajka)
     new_tag = tag.replace("p1", "p3")
     form = "její" if protg.gender == Gender.F else "jeho"
@@ -34,6 +37,7 @@ def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
     return new_form
 
 
+# REPLACE VERBS IN PRESENT TENSE AND CONDITIONAL
 def icher_rule_replace_predicates(word):
     tag = word.tag
     if "p1" in tag and ("mI" in tag or "mB" in tag):
@@ -43,6 +47,8 @@ def icher_rule_replace_predicates(word):
     # other cases
     return word.word
 
+
+# REPLACE or DELETE AUXILIARY VERBS
 def icher_rule_replace_delete_auxverb(word):
     tag = word.tag
     if tag and "k5" in tag:
@@ -53,6 +59,7 @@ def icher_rule_replace_delete_auxverb(word):
     new_tag = tag.replace("p1", "p3")
     new_form = Morph.get_words(word.lemma, new_tag)[0]  # todo?
     return new_form
+
 
 def decide_use_name(prob=None) -> bool:
     rand = random()
