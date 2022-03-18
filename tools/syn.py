@@ -3,7 +3,10 @@ from typing import List
 
 from tools.morph import Morph
 
-SET_PATH = "../set/"
+# SET_PATH = "../set/" home
+SET_PATH = "/nlp/projekty/set/set/set.py"
+DESAMB_PATH = "/corpora/programy/desamb.utf8.majka.sh"
+UNITOK_PATH = "/corpora/programy/unitok.py.czech"
 
 
 class Syn:
@@ -11,8 +14,11 @@ class Syn:
     Class providing the usage of SET, syntactic analyzer.
     """
 
-    command = SET_PATH + "set.py {options} {filename}"
+    # command = SET_PATH + "set.py {options} {filename}"
+    command = "echo {sentence} | " + UNITOK_PATH + " | " + DESAMB_PATH + " | " + SET_PATH
 
+
+    '''
     @staticmethod
     def _generate_vertical(sentence: str) -> str:
         """
@@ -38,6 +44,8 @@ class Syn:
             filename = f.name
 
         return filename
+    
+    '''
 
     @classmethod
     def get_sentence_nodes(cls, sentence: str) -> List[List[str]]:
@@ -46,8 +54,9 @@ class Syn:
         :param sentence: string, sentence to be analyzed
         :return: list of words with metadata in form [index, word, dependency index, dep/phr, member type]
         """
-        vertical_input_filename = cls._generate_vertical(sentence)  # TODO generate by SET
-        output = os.popen(cls.command.format(options="", filename=vertical_input_filename))
+        # vertical_input_filename = cls._generate_vertical(sentence)  # TODO generate by SET
+        # output = os.popen(cls.command.format(options="", filename=vertical_input_filename))
+        output = os.popen(cls.command.format(options="", sentence=sentence))
         sentence = output.read()
         nodes: List[List[str]] = [node.split('\t') for node in sentence.split('\n')][:-1]
         return nodes

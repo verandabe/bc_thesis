@@ -16,8 +16,8 @@ from Members import Member
 rerich = RephrasErIch(Form.ICH)
 
 
-rerich.create_protagonist("Princezna")
-print(rerich.rephrase("Chci vidět maminku."))
+rerich.create_protagonist("Petr")
+print(rerich.rephrase("Chci vidět maminku, ale není tu. Včera jsem pracoval na zahradě a teď mě z toho bolí záda."))
 
 
 

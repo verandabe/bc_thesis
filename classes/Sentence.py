@@ -30,7 +30,7 @@ class Sentence:
         """
         words = []
         for node in self.nodes:
-            index, word_form, parent_idx, _, member = node
+            index, word_form, parent_idx, _, member, _ = node
             word = Word(int(index),
                         word_form,
                         self._assign_member(word_form, member),
@@ -109,7 +109,6 @@ class Sentence:
                     names_considered = False
             else:
                 new_forms.append(word.new_form)
-            print(new_forms)
         self.new_sentence = " ".join(new_forms)
 
     def _deal_with_names(self, word, new_forms, first) -> bool:
