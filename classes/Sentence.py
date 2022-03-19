@@ -30,14 +30,18 @@ class Sentence:
         """
         words = []
         for node in self.nodes:
-            index, word_form, parent_idx, _, member, _ = node
+            index, word_form, parent_idx, _, member, _, wlt = node
             word = Word(int(index),
                         word_form,
-                        self._assign_member(word_form, member),
+                        member,
                         int(parent_idx),
                         [],
                         {},  # TODO self.anaphors[word_form],
                         False)  # TODO direct speech, anaphors
+            if wlt:
+                word.lemma = wlt[1]
+                word.tag = wlt[2]
+            word.member = self._assign_member(word)
             words.append(word)
         self._add_dependencies(words)
 
@@ -65,25 +69,25 @@ class Sentence:
             if word.parent_idx == -1:
                 return word
 
-    def _is_word_predicate(self, word_form: str, member) -> bool:
-        if len(member) > 0:
+    def _is_word_predicate(self, word: Word) -> bool:
+        if len(word.member) > 0:
             return False
-        tag = Morph.get_tag(word_form)
+        tag = word.tag
         return tag and len(tag) > 1 and tag[1] == "5"
 
-    def _is_word_cond(self, word_form: str, member) -> bool:
-        if len(member) > 0:
+    def _is_word_cond(self, word: Word) -> bool:
+        if len(word.member) > 0:
             return False
-        lemma = Morph.get_lemma(word_form)
+        lemma = word.lemma
         return lemma == "kdyby" or lemma == "aby"
 
-    def _assign_member(self, word_form: str, member_input: str) -> Member:
-        if self._is_word_predicate(word_form, member_input):
+    def _assign_member(self, word: Word) -> Member:
+        if self._is_word_predicate(word):
             return Member.pred
-        if self._is_word_cond(word_form, member_input):
+        if self._is_word_cond(word):
             return Member.y
-        if Member.has_value(member_input):
-            return Member(member_input)
+        if Member.has_value(word.member):
+            return Member(word.member)
         return Member.other
 
     def rephrase(self, form: Form):

@@ -14,8 +14,8 @@ class Word:
     def __init__(self, index, string: str, member: Member, parent_idx, dependents, anaphor, ds: bool):
         self.index = index
         self.word = string
-        self.lemma = Morph.get_lemma(string)  # TODO
-        self.tag = Morph.get_tag(string)
+        self.lemma = None
+        self.tag = None
         # self.lts = Morph.get_lt(string)
         self.member = member
         self.parent_idx = parent_idx
@@ -39,6 +39,9 @@ class Word:
         return "<" not in self.word
 
     def ich_to_er(self, protg: Protagonist):
+        if self.word == "mám":
+            print(self.member)
+            print(self.tag)
         if self.member == Member.pred:
             self.new_form = icher_rule_replace_predicates(self)
         elif self.member == Member.auxiliary_verb or self.member == Member.y:
@@ -46,8 +49,8 @@ class Word:
         else:
             if self.lemma == "já" and "p1" in self.tag:
                 self.new_form = icher_rule_replace_me_forms(self.tag, self.member, protg)
-            elif self.lemma == "můj" and "p1" in self.tag:
-                self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
+            #elif self.lemma == "můj" and "p1" in self.tag:
+             #   self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
 
 
 
