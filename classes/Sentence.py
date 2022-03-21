@@ -31,13 +31,15 @@ class Sentence:
         words = []
         for node in self.nodes:
             index, word_form, parent_idx, _, member, _, wlt = node
+            if word_form in self.anaphors:
+                anaphor = self.anaphors[word_form]
             word = Word(int(index),
                         word_form,
                         member,
                         int(parent_idx),
                         [],
-                        {},  # TODO self.anaphors[word_form],
-                        False)  # TODO direct speech, anaphors
+                        anaphor,
+                        False)  # TODO direct speech
             if wlt:
                 word.lemma = wlt[1]
                 word.tag = wlt[2]

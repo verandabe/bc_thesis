@@ -11,7 +11,7 @@ class Word:
     Class representing a word.
     """
 
-    def __init__(self, index, string: str, member: Member, parent_idx, dependents, anaphor, ds: bool):
+    def __init__(self, index, string: str, member: Member, parent_idx, dependents, anaphor: str, ds: bool):
         self.index = index
         self.word = string
         self.lemma = None
@@ -47,9 +47,9 @@ class Word:
         elif self.member == Member.auxiliary_verb or self.member == Member.y:
             self.new_form = icher_rule_replace_delete_auxverb(self)
         else:
-            if self.lemma == "já" and "p1" in self.tag:
+            if (self.lemma == "já" or self.anaphor == "já") and "p1" in self.tag:
                 self.new_form = icher_rule_replace_me_forms(self.tag, self.member, protg)
-            #elif self.lemma == "můj" and "p1" in self.tag:
+            #elif (self.lemma == "můj" or self.anaphor == "já") and "p1" in self.tag:
              #   self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
 
 

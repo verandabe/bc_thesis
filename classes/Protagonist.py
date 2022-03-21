@@ -12,6 +12,7 @@ class Protagonist:
         self.name = name
         self.forms = self._try_generate_forms()
         self.gender = self._get_gender()
+        self.forms_own_loaded = False
 
     def _try_generate_forms(self):
         """
@@ -22,9 +23,10 @@ class Protagonist:
         if generated:
             return list(filter(lambda f: "nS" in f[1], generated))
 
+        self.forms_own_loaded = True
         return self.load_own_forms()
 
-    def load_own_forms(self, file_name=None):  # TODO
+    def load_own_forms(self, file_name=None):
         """
         Loads the forms of protagonist's name from a given file in form "lemma tag\n"
         If file_name not given, returns calling of _create_forms method.

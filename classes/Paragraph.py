@@ -4,7 +4,7 @@ from utils import sentence_segment
 
 from Protagonist import Protagonist
 from Sentence import Sentence
-from Forms import Form
+from anaph import Anaph
 
 
 class Paragraph:
@@ -15,7 +15,7 @@ class Paragraph:
     def __init__(self, par_text: str, protg: Protagonist):
         self.text = par_text
         self.protg = protg
-        self.anaphors = {}  # TODO
+        self.anaphors: dict = Anaph.resolve(self.text)
         self.sentences = self._create_sentences()
         self.new_paragraph = self.text
 
@@ -23,12 +23,9 @@ class Paragraph:
         text_sentences = sentence_segment(self.text)
         object_sentences = []
         for s in text_sentences:
-            sentence = Sentence(s, self.anaphors, self.protg)
+            sentence = Sentence(s, self.anaphors[s], self.protg)
             object_sentences.append(sentence)
         return object_sentences
-
-    def resolve_anaphors(self):
-        pass  # TODO
 
 
 

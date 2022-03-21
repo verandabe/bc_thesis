@@ -24,7 +24,7 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
 
     if len(new_forms) > 1:
         if member == Member.prep_object:
-            after_prep_forms = list(filter(lambda x: x[0] = "n", new_forms)
+            after_prep_forms = list(filter(lambda x: x[0] == "n", new_forms))
             if after_prep_forms:
                 return after_prep_forms[0]
     '''if gtag != "gF": # TODO
