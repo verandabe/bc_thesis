@@ -1,4 +1,3 @@
-from anaph import Anaph
 import os
 
 SET_JSON_PATH = "/"
@@ -9,7 +8,7 @@ SET_PATH = "/nlp/projekty/set/set/set.py"
 
 class Anaph:
 
-    aara_command = "echo {TEXT} | " + UNITOK_PATH + " | " + DESAMB_PATH\
+    aara_command = "echo {text} | " + UNITOK_PATH + " | " + DESAMB_PATH\
                    + " | " + SET_PATH + " | " + SET_JSON_PATH + " | " + AARA_PATH
 
     @classmethod
@@ -21,4 +20,4 @@ class Anaph:
 
     @classmethod
     def parse_aara_output(cls, aara_output: str) -> dict:
-        pass  # TODO
+        return {} # TODO

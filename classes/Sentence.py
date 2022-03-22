@@ -31,6 +31,7 @@ class Sentence:
         words = []
         for node in self.nodes:
             index, word_form, parent_idx, _, member, _, wlt = node
+            anaphor = None
             if word_form in self.anaphors:
                 anaphor = self.anaphors[word_form]
             word = Word(int(index),
@@ -129,7 +130,7 @@ class Sentence:
         return add_name_index
 
     def _name_should_be_added(self, word: Word) -> int:
-        if not decide_use_name(0.5) or not word.tag:
+        if not decide_use_name() or not word.tag:
             return 0
 
         in_front = "k5" in word.tag

@@ -7,7 +7,7 @@ from morph import Morph
 
 from utils import *
 
-PROTG_NAME_USAGE_PROBABILITY = 0.5
+PROTG_NAME_USAGE_PROBABILITY = 0.2
 
 
 # REPLACE PERSONAL PRONOUNS

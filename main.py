@@ -17,6 +17,6 @@ text = "Je mi příšerná zima, mám obrovský strach a třesu se jako osika. L
 rerich = RephrasErIch(Form.ICH)
 
 
-rerich.create_protagonist("Adam")
+rerich.create_protagonist("Winton")
 print(rerich.rephrase(text))
 
