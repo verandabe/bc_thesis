@@ -13,21 +13,79 @@ def erich_rule_replace_name(word: Word, protg: Protagonist):
                 return new_forms[-1]
     return word.word
 
-def erich_rule_replace_pred():
-    pass
+def erich_rule_replace_pred(word: Word, protg: Protagonist):
+    tag = word.tag
+    if "p3" in tag and ("mI" in tag or "mB" in tag):
+        subject = find_local_subject(word)
+        if subject and subject.lemma == protg.name:
+            new_tag = tag.replace("p3", "p1")
+            new_forms = Morph.get_words(word.lemma, new_tag)
+            if new_forms:
+                return new_forms[0]  # todo?
+    return word.word
 
 
-def erich_rule_replace_auxverb():
-    pass
+# REPLACE CONDITIONAL FORMS
+def erich_rule_replace_auxverb(word: Word, protg: Protagonist):
+    # word.member == Member.auxiliary_verb and "p3" in word.tag:
+    pred_ancestor = find_pred_ancestor(word)
+    subject: Word = find_local_subject(pred_ancestor)
+    if subject:
+        if subject.lemma == protg.name:
+            tag = word.tag
+            new_tag = tag.replace("p3", "p1")
+            new_forms = Morph.get_words(word.lemma, new_tag)
+            if new_forms:
+                return new_forms[0]
+    return word.word
 
 
-def erich_rule_add_auxverb():
-    pass
+def erich_rule_add_auxverb(word: Word, protg: Protagonist):
+    # word.member == member.pred and "p" not in tag
+    if "mA" in word.tag or "mN" in word.tag:
+        # TODO resolved subjects
+        subject = find_local_subject(word)
+        if subject:
+            if subject.lemma == protg.name:
+                number = get_tag_part(word.tag, "n")
+                aux_verb_form = "jsem" if number == "S" else "jsme"
+                return aux_verb_form
+    return None
+    # kam?
 
 
-def erich_rule_replace_personal_pronouns():
-    pass
+def erich_rule_replace_personal_pronouns(word: Word, protg: Protagonist):
+    # "k3" in word.tag and "p3" in word.tag:
+    if protg.name == word.anaphor:
+        tag = word.tag
+        new_tag = tag.replace("p3", "p1")
+        new_forms = Morph.get_words(word.lemma, new_tag)
+        if new_forms:
+            return new_forms[0]
+    return word.word
 
 
 def erich_rule_replace_possessive_pronouns():
+    # idk if possible with aara
     pass
+
+
+def find_pred_ancestor(word: Word) -> Word:
+    current_ancestor = word.parent_node
+    if current_ancestor.member == Member.pred or current_ancestor.member == Member.clause:
+        return current_ancestor
+    return find_pred_ancestor(current_ancestor)
+
+
+def find_local_subject(root: Word):
+    for offspring in root.dependents:
+        if is_subject(offspring):
+            return offspring
+        potential_subject = find_local_subject(offspring)
+        if potential_subject:
+            return potential_subject
+    return None
+
+
+def is_subject(word: Word):
+    return word.member == Member.subject or word.member == Member.subject_bad
