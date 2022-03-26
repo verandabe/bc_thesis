@@ -1,6 +1,7 @@
 from Forms import Form
 from Members import Member
 from icher_rules import *
+from erich_rules import *
 from morph import Morph
 
 from Protagonist import Protagonist
@@ -51,14 +52,19 @@ class Word:
                 self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
 
     def er_to_ich(self, protg: Protagonist):
-        print(protg.name)
         if self.lemma == protg.name or not self.lemma:
             self.new_form = erich_rule_replace_name(self, protg)
         if self.member == Member.pred:
             if "p3" in self.tag:
                 self.new_form = erich_rule_replace_pred(self, protg)
             else:
-                self.new_form = erich_rule_add_auxverb(self, protg)
+                result_tuple = erich_rule_add_auxverb(self, protg)
+                if not result_tuple[1]:
+                    self.new_form = result_tuple[0]
+                elif find_local_subject(self):  # TODO some pravidlo ah idk
+                    self.new_form = result_tuple[1] + " " + result_tuple[0]
+                else:
+                    self.new_form = result_tuple[0] + " " + result_tuple[1]
         elif self.member == Member.auxiliary_verb and "p3" in self.tag:
             self.new_form = erich_rule_replace_auxverb(self, protg)
         elif "k3" in self.tag and "xP" in self.tag and "p3" in self.tag:

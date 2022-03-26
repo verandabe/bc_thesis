@@ -104,8 +104,7 @@ class Sentence:
             if form == Form.ICH:
                 word.ich_to_er(self.protg)
             elif form == Form.ER:
-                pass  # TODO
-                # give (clauseidx,subject) or sth
+                word.er_to_ich(self.protg)
 
             if first:
                 first = False
