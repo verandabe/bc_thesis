@@ -11,7 +11,7 @@ PROTG_NAME_USAGE_PROBABILITY = 0.2
 
 
 # REPLACE PERSONAL PRONOUNS
-def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
+def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, isfirst: bool):
     gtag = "g" + protg.gender.name
     if decide_use_name():
         case = get_tag_part(tag, "c")
@@ -27,16 +27,16 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist):
             after_prep_forms = list(filter(lambda x: x[0] == "n", new_forms))
             if after_prep_forms:
                 return after_prep_forms[0]
-    '''if gtag != "gF": # TODO
-        if NeniVPriklonnePozici:
-            filter zacina na j
-        else mu/ho'''
-    return new_forms[0]
+
+    first_forms = list(filter(lambda x: x[0] != "n", new_forms))
+    if gtag != "gF" and isfirst:
+        return max(first_forms, key=len)
+    return min(first_forms, key=len)
 
 
 # REPLACE POSSESIVE PRONOUNS
-def icher_rule_replace_mine_forms(tag: str, protg: Protagonist): # TODO opravit
-    # new_tag = tag.replace("xOp1", "p3") + "xO"  # kdyz vertical generuje set (taguje ajka)
+def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
+    # new_tag = tag.replace("xOp1", "p3") + "xO" ?
     new_tag = tag.replace("p1", "p3")
     form = "její" if protg.gender == Gender.F else "jeho"
     # TODO načítání i přivlastnovaci tvary jmena? zatim nahrazovat zajmenem

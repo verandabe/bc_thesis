@@ -33,27 +33,34 @@ class Word:
             self.ich_to_er(protg)
 
         elif form == Form.ER:
-            pass
+            self.er_to_ich(protg)
 
     def is_real_word(self) -> bool:
         return "<" not in self.word
 
     def ich_to_er(self, protg: Protagonist):
-        if self.word == "mám":
-            print(self.member)
-            print(self.tag)
         if self.member == Member.pred:
             self.new_form = icher_rule_replace_predicates(self)
         elif self.member == Member.auxiliary_verb or self.member == Member.y:
             self.new_form = icher_rule_replace_delete_auxverb(self)
         else:
             if (self.lemma == "já" or self.anaphor == "já") and "p1" in self.tag:
-                self.new_form = icher_rule_replace_me_forms(self.tag, self.member, protg)
-            #elif (self.lemma == "můj" or self.anaphor == "já") and "p1" in self.tag:
-             #   self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
+                first = self.index == 0  # TODO
+                self.new_form = icher_rule_replace_me_forms(self.tag, self.member, protg, first)
+            elif (self.lemma == "můj" or self.anaphor == "já") and "p1" in self.tag:
+                self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
 
-
-
-
-
+    def er_to_ich(self, protg: Protagonist):
+        print(protg.name)
+        if self.lemma == protg.name or not self.lemma:
+            self.new_form = erich_rule_replace_name(self, protg)
+        if self.member == Member.pred:
+            if "p3" in self.tag:
+                self.new_form = erich_rule_replace_pred(self, protg)
+            else:
+                self.new_form = erich_rule_add_auxverb(self, protg)
+        elif self.member == Member.auxiliary_verb and "p3" in self.tag:
+            self.new_form = erich_rule_replace_auxverb(self, protg)
+        elif "k3" in self.tag and "xP" in self.tag and "p3" in self.tag:
+            self.new_form = erich_rule_replace_personal_pronouns(self, protg)
 

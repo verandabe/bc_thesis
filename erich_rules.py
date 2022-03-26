@@ -13,6 +13,7 @@ def erich_rule_replace_name(word: Word, protg: Protagonist):
                 return new_forms[-1]
     return word.word
 
+
 def erich_rule_replace_pred(word: Word, protg: Protagonist):
     tag = word.tag
     if "p3" in tag and ("mI" in tag or "mB" in tag):
@@ -55,7 +56,7 @@ def erich_rule_add_auxverb(word: Word, protg: Protagonist):
 
 
 def erich_rule_replace_personal_pronouns(word: Word, protg: Protagonist):
-    # "k3" in word.tag and "p3" in word.tag:
+    # "xp" and "k3" in word.tag and "p3" in word.tag:
     if protg.name == word.anaphor:
         tag = word.tag
         new_tag = tag.replace("p3", "p1")
@@ -89,3 +90,4 @@ def find_local_subject(root: Word):
 
 def is_subject(word: Word):
     return word.member == Member.subject or word.member == Member.subject_bad
+
