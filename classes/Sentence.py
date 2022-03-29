@@ -32,8 +32,9 @@ class Sentence:
         for node in self.nodes:
             index, word_form, parent_idx, _, member, _, wlt = node
             anaphor = None
-            if word_form in self.anaphors:
-                anaphor = self.anaphors[word_form]
+            #if word_form.lower() in self.anaphors:
+            #    anaphor = self.anaphors[word_form.lower()]
+            anaphor = None
             word = Word(int(index),
                         word_form,
                         member,
@@ -45,6 +46,8 @@ class Sentence:
                 word.lemma = wlt[1]
                 word.tag = wlt[2]
             word.member = self._assign_member(word)
+            if word.lemma in self.anaphors:
+                word.anaphor = self.anaphors[word.lemma]
             words.append(word)
         self._add_dependencies(words)
 

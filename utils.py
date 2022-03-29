@@ -3,7 +3,7 @@ from typing import List
 
 # very simplified sentence segmenter, to be updated
 def sentence_segment(text: str) -> List[str]:
-    sen_seps = '([^.?!]+[.?!]+)'
+    sen_seps = '([^\s][^.?!]*[.?!]+)'
     return re.findall(sen_seps, text)
 
 

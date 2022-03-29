@@ -23,8 +23,8 @@ class Paragraph:
         text_sentences = sentence_segment(self.text)
         object_sentences = []
         for s in text_sentences:
-            if s in self.anaphors:
-                sentence = Sentence(s, self.anaphors[s], self.protg)
+            if s[:-1] in self.anaphors:
+                sentence = Sentence(s, self.anaphors[s[:-1]], self.protg)
             else:
                 sentence = Sentence(s, {}, self.protg)
             object_sentences.append(sentence)

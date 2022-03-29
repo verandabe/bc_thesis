@@ -60,8 +60,8 @@ def erich_rule_replace_personal_pronouns(word, protg: Protagonist):
     # "xp" and "k3" in word.tag and "p3" in word.tag:
     if protg.name == word.anaphor:
         tag = word.tag
-        new_tag = tag.replace("p3", "p1")
-        new_forms = Morph.get_words(word.lemma, new_tag)
+        new_tag = tag.replace("xPp3gM", "p1") + "xP"
+        new_forms = Morph.get_words("já", new_tag)
         if new_forms:
             return new_forms[0]
     return word.word
