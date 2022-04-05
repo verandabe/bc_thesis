@@ -1,4 +1,5 @@
 from typing import List
+import re
 
 from utils import sentence_segment
 
@@ -13,7 +14,7 @@ class Paragraph:
     """
 
     def __init__(self, par_text: str, protg: Protagonist):
-        self.text = par_text
+        self.text = self.preprocess_direct_speech(par_text)
         self.protg = protg
         self.anaphors: dict = Anaph.resolve(self.text)
         self.sentences = self._create_sentences()
@@ -30,6 +31,14 @@ class Paragraph:
             object_sentences.append(sentence)
         return object_sentences
 
+    def preprocess_direct_speech(self, text):
+        pattern = r'[„][^„“]*[“]'
 
+        def direct_repl(matchobj):
+            repl = matchobj.group(0).replace(" ", "_")
+            return repl
+
+        prepared_par = re.sub(pattern, direct_repl, text)
+        return prepared_par
 
 

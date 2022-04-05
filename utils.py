@@ -13,5 +13,8 @@ def get_tag_part(tag: str, category: str) -> str:
             return tag[letter_idx + 1]
 
 
-def postprocess(rephrased: list):
+def postprocess(rephrased):
+
     return rephrased  # TODO
+
+

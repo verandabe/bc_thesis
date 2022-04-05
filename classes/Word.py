@@ -28,10 +28,10 @@ class Word:
         self.unex_subject = None  # Only for predicates
 
     def generate_new_form(self, form: Form, protg: Protagonist):  # TODO
-        if not self.is_real_word() or self.direct_speech:
-            return
+        if self.direct_speech:
+            self.process_direct_speech()
 
-        if form == Form.ICH:
+        elif form == Form.ICH:
             self.ich_to_er(protg)
 
         elif form == Form.ER:
@@ -70,4 +70,7 @@ class Word:
             self.new_form = erich_rule_replace_auxverb(self, protg)
         elif "k3" in self.tag and "xP" in self.tag and "p3" in self.tag:
             self.new_form = erich_rule_replace_personal_pronouns(self, protg)
+
+    def process_direct_speech(self):
+        self.new_form = self.word.replace('_', ' ')
 

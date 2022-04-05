@@ -25,5 +25,4 @@ class Text:
             object_paragraphs.append(paragraph)
         return object_paragraphs
 
-    def resolve_anaphors(self):  # TODO
-        pass
+
