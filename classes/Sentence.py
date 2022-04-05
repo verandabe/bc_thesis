@@ -8,6 +8,7 @@ from morph import Morph
 from Protagonist import Protagonist
 from Word import Word
 from icher_rules import *
+from erich_rules import *
 
 class Sentence:
     """
@@ -50,6 +51,7 @@ class Sentence:
                 word.anaphor = self.anaphors[word.lemma]
             words.append(word)
         self._add_dependencies(words)
+        self._add_unexpressed_subject(words)
 
         return words
 
@@ -66,6 +68,16 @@ class Sentence:
             if word.parent_idx == -1:
                 continue
             word.parent_node = self.words[word.parent_idx]
+
+    def _add_unexpressed_subject(self, words: List[Word]):
+        if "_" not in self.anaphors:
+            return
+        for word in words:
+            if word.member == Member.pred:
+                if find_local_subject(word):
+                    return
+                word.unex_subject = self.anaphors["_"]
+
 
     def _find_root(self) -> Word:
         """
@@ -113,7 +125,7 @@ class Sentence:
                 first = False
                 word.new_form = word.new_form[0].upper() + word.new_form[1:]
 
-            if names_considered:
+            if names_considered and form == Form.ICH:
                 no_consider = self._deal_with_names(word, new_forms, first)
                 if no_consider:
                     names_considered = False

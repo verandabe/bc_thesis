@@ -19,7 +19,8 @@ def erich_rule_replace_pred(word, protg: Protagonist):
     tag = word.tag
     if "p3" in tag and ("mI" in tag or "mB" in tag):
         subject = find_local_subject(word)
-        if subject and subject.lemma == protg.name:
+        if (subject and (subject.lemma == protg.name or subject.anaphor == protg.name))\
+            or word.unex_subject == protg.name:
             new_tag = tag.replace("p3", "p1")
             new_forms = Morph.get_words(word.lemma, new_tag)
             if new_forms:
@@ -33,7 +34,7 @@ def erich_rule_replace_auxverb(word, protg: Protagonist):
     pred_ancestor = find_pred_ancestor(word)
     subject = find_local_subject(pred_ancestor)
     if subject:
-        if subject.lemma == protg.name:
+        if (subject.lemma == protg.name or subject.anaphor == protg.name):
             tag = word.tag
             new_tag = tag.replace("p3", "p1")
             new_forms = Morph.get_words(word.lemma, new_tag)
@@ -47,8 +48,7 @@ def erich_rule_add_auxverb(word, protg: Protagonist) -> tuple:
     if "mA" in word.tag or "mN" in word.tag:
         # TODO resolved subjects
         subject = find_local_subject(word)
-        if subject:
-            if subject.lemma == protg.name:
+        if (subject and subject.lemma == protg.name) or word.unex_subject == protg.name:
                 number = get_tag_part(word.tag, "n")
                 aux_verb_form = "jsem" if number == "S" else "jsme"
                 return (word.word, aux_verb_form)

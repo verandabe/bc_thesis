@@ -25,6 +25,7 @@ class Word:
         self.new_form = string#+"_new"  # TODO delete after testing
         self.anaphor = anaphor
         self.direct_speech = ds
+        self.unex_subject = None  # Only for predicates
 
     def generate_new_form(self, form: Form, protg: Protagonist):  # TODO
         if not self.is_real_word() or self.direct_speech:
