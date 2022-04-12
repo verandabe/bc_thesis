@@ -56,6 +56,7 @@ class Sentence:
         self._add_dependencies(words)
         self._add_unexpressed_subject(words)
 
+        print("clss/sentence: anaphors: ", self.anaphors)
         return words
 
     def _add_dependencies(self, words: List[Word]) -> None:
@@ -112,20 +113,15 @@ class Sentence:
         return Member.other
 
     def rephrase(self, form: Form):
-        # TODO add protagonist as subject in ichtoer
         new_forms = []
         first = True
         names_considered = True
         for word in self.words:
             if not word.is_real_word():
                 continue
-            #if form == Form.ICH:
-                word.ich_to_er(self.protg)
-            #elif form == Form.ER:
-                word.er_to_ich(self.protg)
             word.generate_new_form(form, self.protg)
 
-            if first:
+            if first and word.new_form:
                 first = False
                 word.new_form = word.new_form[0].upper() + word.new_form[1:]
 

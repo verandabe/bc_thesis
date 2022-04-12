@@ -42,7 +42,6 @@ class Morph:
 
     @classmethod
     def get_lemma(cls, word: str) -> str:
-        # TODO vracet vsechny?
         lts = cls.get_lt(word)
         if not lts:
             return word

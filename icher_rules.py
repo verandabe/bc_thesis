@@ -1,13 +1,9 @@
-from random import random
-
 from Genders import Gender
 from Members import Member
 from Protagonist import Protagonist
 from morph import Morph
 
 from utils import *
-
-PROTG_NAME_USAGE_PROBABILITY = 0.2
 
 
 # REPLACE PERSONAL PRONOUNS
@@ -72,7 +68,3 @@ def icher_rule_replace_delete_auxverb(word):
         return new_forms[0]  # todo?
     return word.word
 
-
-def decide_use_name(prob=None) -> bool:
-    rand = random()
-    return rand < (PROTG_NAME_USAGE_PROBABILITY if prob is None else prob)

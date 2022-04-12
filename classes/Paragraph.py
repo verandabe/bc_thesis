@@ -24,10 +24,11 @@ class Paragraph:
         text_sentences = sentence_segment(self.text)
         object_sentences = []
         for s in text_sentences:
-            if s[:-1] in self.anaphors:
-                sentence = Sentence(s, self.anaphors[s[:-1]], self.protg)
-            else:
-                sentence = Sentence(s, {}, self.protg)
+            for sent_anaph in self.anaphors:
+                if sent_anaph in s[:-1]:
+                    sentence = Sentence(s, self.anaphors[sent_anaph], self.protg)
+                else:
+                    sentence = Sentence(s, {}, self.protg)
             object_sentences.append(sentence)
         return object_sentences
 

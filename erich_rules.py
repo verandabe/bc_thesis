@@ -7,9 +7,14 @@ from utils import *
 def erich_rule_replace_name(word, protg: Protagonist):
     for form in protg.forms:
         if form[0] == word.word:
+            skip_name = not decide_use_name(0.4)
+            if skip_name and word.parent_node.word != "<coord>":
+                return ""
+
             case = get_tag_part(word.tag, "c")
             new_tag = "k3p1nSc" + str(case) + "xP"
             new_forms = Morph.get_words("já", new_tag)
+
             if new_forms:
                 return new_forms[-1]
     return word.word
@@ -46,9 +51,12 @@ def erich_rule_replace_auxverb(word, protg: Protagonist):
 def erich_rule_add_auxverb(word, protg: Protagonist) -> tuple:
     # word.member == member.pred and "p" not in tag
     if "mA" in word.tag or "mN" in word.tag:
-        # TODO resolved subjects
         subject = find_local_subject(word)
-        if (subject and subject.lemma == protg.name) or word.unex_subject == protg.name:
+        if (subject and subject.word == "<coord>"):
+            subject = protg_in_coord(subject, protg)
+        if (subject and subject.lemma == protg.name
+            or subject.anaphor == protg.name) \
+            or word.unex_subject == protg.name:
                 number = get_tag_part(word.tag, "n")
                 aux_verb_form = "jsem" if number == "S" else "jsme"
                 return (word.word, aux_verb_form)
@@ -92,4 +100,10 @@ def find_local_subject(root):
 def is_subject(word):
     return word.member == Member.subject or word.member == Member.subject_bad
 
-# TODO prirazeni Member special types (<>)
+
+def protg_in_coord(coord, protg):
+    for dep in coord.dependents:
+        if dep.word == protg.name:
+            return dep
+    return coord
+
