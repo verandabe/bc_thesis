@@ -15,7 +15,7 @@ class Sentence:
     Class object representing a sentence
     """
 
-    def __init__(self, sentence: str, anaphors: Dict[str, str], protg: Protagonist):
+    def __init__(self, sentence: str, anaphors: Dict[str, str], protg):
         self.nodes = Syn.get_sentence_nodes(sentence)
         self.anaphors = anaphors
         self.words = self._create_words_objects()
@@ -53,10 +53,10 @@ class Sentence:
 
             if word_form == "„": ds = True
             elif word_form == "“": ds = False
+
         self._add_dependencies(words)
         self._add_unexpressed_subject(words)
 
-        print("clss/sentence: anaphors: ", self.anaphors)
         return words
 
     def _add_dependencies(self, words: List[Word]) -> None:

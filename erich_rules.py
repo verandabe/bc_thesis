@@ -54,8 +54,8 @@ def erich_rule_add_auxverb(word, protg: Protagonist) -> tuple:
         subject = find_local_subject(word)
         if (subject and subject.word == "<coord>"):
             subject = protg_in_coord(subject, protg)
-        if (subject and subject.lemma == protg.name
-            or subject.anaphor == protg.name) \
+        if (subject and (subject.lemma == protg.name
+            or subject.anaphor == protg.name)) \
             or word.unex_subject == protg.name:
                 number = get_tag_part(word.tag, "n")
                 aux_verb_form = "jsem" if number == "S" else "jsme"

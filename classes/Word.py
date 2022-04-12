@@ -26,15 +26,15 @@ class Word:
         self.direct_speech = ds
         self.unex_subject = None  # Only for predicates
 
-    def generate_new_form(self, form: Form, protg: Protagonist)
+    def generate_new_form(self, form: Form, protg: Protagonist):
         if self.direct_speech:
             self.process_direct_speech()
 
         elif form == Form.ICH:
-            self.ich_to_er(protg)
+            self._ich_to_er(protg)
 
         elif form == Form.ER:
-            self.er_to_ich(protg)
+            self._er_to_ich(protg)
 
     def is_real_word(self) -> bool:
         return "<" not in self.word

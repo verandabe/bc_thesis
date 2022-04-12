@@ -17,7 +17,8 @@ def get_tag_part(tag: str, category: str) -> str:
 
 
 def postprocess(rephrased):
-    return rephrased  # TODO
+    postprocessed = [part.replace('_', ' ') for part in rephrased]
+    return postprocessed  # TODO
 
 def decide_use_name(prob=None) -> bool:
     rand = random()
