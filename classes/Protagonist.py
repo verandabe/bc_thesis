@@ -51,6 +51,7 @@ class Protagonist:
         Loads protagonist name's forms and tags as user input.
         """
 
+        print("Creating forms for Protagonist, ", self.name)
         gender = "g"
         while gender not in "fFmMnN":
             gender = input("Protagonist's gender (F/M/N):  ").upper()

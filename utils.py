@@ -18,6 +18,7 @@ def get_tag_part(tag: str, category: str) -> str:
 
 def postprocess(rephrased):
     postprocessed = [part.replace('_', ' ') for part in rephrased]
+    # postprocessed = [part.replace(' . ', '. ') for part in rephrased] /// ,?:|; ...
     return postprocessed  # TODO
 
 def decide_use_name(prob=None) -> bool:
