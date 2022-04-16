@@ -8,9 +8,8 @@ class Protagonist:
     Represents a Protagonist of a text being converted
     """
 
-    def __init__(self, name: str, possesive_name: str):
+    def __init__(self, name: str):
         self.name = name
-        self.poss_name = possesive_name
         self.forms = self._try_generate_forms()
         self.gender = self._get_gender()
         self.forms_own_loaded = False

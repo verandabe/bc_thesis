@@ -16,7 +16,6 @@ class Anaph:
         output = os.popen(cls.aara_command.format(text=text))
         aara_output = output.read()
         anaphors: dict = cls.parse_aara_output(aara_output)
-        print(anaphors)
         return anaphors
 
     @classmethod
@@ -30,5 +29,4 @@ class Anaph:
             non_empty_diffs = list(filter(lambda d: len(d) > 3, diffs))
             diffs = [tuple(diff[3:].split('-')) for diff in non_empty_diffs]
             anaph_dict[old] = dict(diffs)
-        print("tools/anaph:  anaph_dict:  ", anaph_dict)
         return anaph_dict

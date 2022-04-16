@@ -48,9 +48,10 @@ class Syn:
         for n in range(len(nodes)):
             if t > len(morph_infos) - 1:
                 nodes[n].append(None)
-            elif morph_infos[t][0] == nodes[n][1]:
-                nodes[n].append(morph_infos[t])
-                t += 1
+            else:
+                if morph_infos[t][0] == nodes[n][1]:
+                    nodes[n].append(morph_infos[t])
+                    t += 1
 
 
     '''

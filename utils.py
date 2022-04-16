@@ -17,9 +17,14 @@ def get_tag_part(tag: str, category: str) -> str:
 
 
 def postprocess(rephrased):
-    postprocessed = [part.replace('_', ' ') for part in rephrased]
-    # postprocessed = [part.replace(' . ', '. ') for part in rephrased] /// ,?:|; ...
-    return postprocessed  # TODO
+    postprocessed = rephrased[:]
+    for p in range(len(rephrased)):
+        ds_postpo = re.sub('_', ' ', rephrased[p])
+        diac_postpo = re.sub('([„\[\({])(\s)', r'\1', ds_postpo)
+        diac_postpo = re.sub('(\s)([,;:?!.}\)\]“])', r'\2', diac_postpo)
+        postprocessed.append(diac_postpo)
+    return postprocessed
+
 
 def decide_use_name(prob=None) -> bool:
     rand = random()
