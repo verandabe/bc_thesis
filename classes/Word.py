@@ -40,9 +40,9 @@ class Word:
         return "<" not in self.word
 
     def _ich_to_er(self, protg: Protagonist):
-        if self.member == Member.pred:
+        if self.member == Member.pred or self.member == Member.y:
             self.new_form = icher_rule_replace_predicates(self)
-        elif self.member == Member.auxiliary_verb or self.member == Member.y:
+        elif self.member == Member.auxiliary_verb:
             self.new_form = icher_rule_replace_delete_auxverb(self)
         else:
             if (self.lemma == "já" or self.anaphor == "já") and "p1" in self.tag:

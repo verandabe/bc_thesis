@@ -32,7 +32,7 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, is
 
 # REPLACE POSSESIVE PRONOUNS
 def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
-    new_tag = tag.replace("xOp1", "p3") + "xO" 
+    new_tag = tag.replace("xOp1", "p3") + "xO"
     form = "její" if protg.gender == Gender.F else "jeho"
     # TODO načítání i přivlastnovaci tvary jmena? zatim nahrazovat zajmenem
     new_forms = Morph.get_words(form, new_tag)
@@ -41,12 +41,11 @@ def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
     return form
 
 
-# REPLACE VERBS IN PRESENT TENSE AND CONDITIONAL
+# REPLACE VERBS IN PRESENT TENSE AND CONDITIONALS, CONJUNCTIONS
 def icher_rule_replace_predicates(word):
     tag = word.tag
-    if "p1" in tag and ("mI" in tag or "mB" in tag):
-        new_tag = tag.replace("p1", "p3")
-        new_forms = Morph.get_words(word.lemma, new_tag)
+    if "p1" in tag and ("mI" in tag or "mB" in tag or "mC" in tag):
+        new_forms = generate_new_forms(word.lemma, tag)
         if new_forms:
             return new_forms[0]  # todo?
     # other cases
@@ -56,14 +55,18 @@ def icher_rule_replace_predicates(word):
 # REPLACE or DELETE AUXILIARY VERBS
 def icher_rule_replace_delete_auxverb(word):
     tag = word.tag
-    if tag and "k5" in tag:
-        if "p1" not in tag:
-            return word.word
-        if word.parent_node and word.parent_node.member == Member.pred:
-            return ''
-    new_tag = tag.replace("p1", "p3")
-    new_forms = Morph.get_words(word.lemma, new_tag)
+    if "p1" not in tag:
+        return word.word
+    if word.parent_node and word.parent_node.member == Member.pred:
+        return ''
+    new_forms = generate_new_forms(word.lemma, tag)
     if new_forms:
         return new_forms[0]  # todo?
     return word.word
+
+
+def generate_new_forms(lemma, tag) -> list:
+    new_tag = tag.replace("p1", "p3")
+    new_forms = Morph.get_words(lemma, new_tag)
+    return new_forms
 
