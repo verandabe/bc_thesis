@@ -8,8 +8,9 @@ class Protagonist:
     Represents a Protagonist of a text being converted
     """
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, possesive_name: str):
         self.name = name
+        self.poss_name = possesive_name
         self.forms = self._try_generate_forms()
         self.gender = self._get_gender()
         self.forms_own_loaded = False
@@ -24,9 +25,11 @@ class Protagonist:
             return list(filter(lambda f: "nS" in f[1], generated))
 
         self.forms_own_loaded = True
-        return self.load_own_forms()
+        # return self.load_own_forms(poss=poss)
+        return self._create_forms(poss)
 
-    def load_own_forms(self, file_name=None):
+    '''
+    def load_own_forms(self, poss=False, file_name=None): # TODO
         """
         Loads the forms of protagonist's name from a given file in form "lemma tag\n"
         If file_name not given, returns calling of _create_forms method.
@@ -45,6 +48,7 @@ class Protagonist:
             forms.append(tuple(form.split()))
 
         return forms
+    '''
 
     def _create_forms(self):
         """
