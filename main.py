@@ -15,20 +15,12 @@ from syn import Syn
 
 from eval_data import *
 
-create_pairs()
+# create_pairs()
 
-'''
-text = "V dospívání jsem dávala najevo vzdor, ale nikdy jsem to nevzala radikálně. Matka i Maryska mě vedly k dospělosti velmi přísně. Záviděla jsem holkám v parku, jak se smějí, objímají se svými chlapci, líbají se. „Vidíš ty holky?“ zeptala se jednou matka, když si všimla, že hledím z okna a pozoruji je. „Starej se jen o sebe a jdi za tím, po čem toužíš. Úspěch. Jsi jen ty, tvrdá cesta a úspěch. Muž tě jen odradí, ublíží ti a přivede tě k neúspěchu. Rozumíš?“ Chtěla jsem něco namítnout, ale mlčky jsem přikývla."
-
+text = "Nikdy jsem si nemyslela, že by se mi něco takového mohlo stát. Máma lpěla na mém vzdělání a já netušila, jak jí vysvětlit, že mě to nezajímá. Táta často mluvil o mých známkách, ale k mému zklamání toho nikdy nenechal."
 rerich = RephrasErIch(Form.ICH)
 rerich.create_protagonist("Stella")
 print(rerich.rephrase(text))
 
-text = "Tom a David nikdy nepochopili, proč je Anička nemá ráda. „Tom je prostě často smutný,“ vysvětlil mu to jednou Pavel. Tom na to nereagoval. \n On neví, co si Anicka myslí."
-text1 = "Tomáš nevěděl, ale máma mu poradila."
-rerich = RephrasErIch(Form.ER)
-rerich.create_protagonist("Tomáš")
-print(rerich.rephrase(text1))
-'''
 
 
