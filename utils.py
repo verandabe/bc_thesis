@@ -17,7 +17,7 @@ def get_tag_part(tag: str, category: str) -> str:
 
 
 def postprocess(rephrased):
-    postprocessed = rephrased[:]
+    postprocessed = []
     for p in range(len(rephrased)):
         ds_postpo = re.sub('_', ' ', rephrased[p])
         diac_postpo = re.sub('([„\[\({])(\s)', r'\1', ds_postpo)
