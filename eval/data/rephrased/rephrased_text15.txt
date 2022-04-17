@@ -1,5 +1,0 @@
-Metadata: from_form=ER, protagonist=Sára
-Original: Sára se najednou rozzářila, jako kdyby slyšela tu nejlepší zprávu na světě. „Jo, jo, jo, jo, jo, mamíííí, prosím, že mě tam může vodit Ben, viď že jo? Maminko, prosím!“ 
-„A pročne? Konečně se s námi snažíš být trochu víc, Benjamine, to je hezké, že děláš sestřičce radost. Tak tedy v pondělí v půl třetí buď tady,“ rozhodla máma.
-Rephrased: Já se najednou jsem rozzářila , jako kdyby slyšela tu nejlepší zprávu na světě . „ Jo ,  jo ,  jo ,  jo ,  jo ,  mamíííí ,  prosím ,  že mě tam může vodit Ben ,  viď že jo ?  Maminko ,  prosím !
-„ A pročne ?  Konečně se s námi snažíš být trochu víc ,  Benjamine ,  to je hezké ,  že děláš sestřičce radost .  Tak tedy v pondělí v půl třetí buď tady , “ rozhodla máma .

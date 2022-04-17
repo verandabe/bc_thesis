@@ -1,5 +1,7 @@
-form::ICH</>
-protg::Benjamín</>
-text::Jakmile jsem uviděl západ slunce, okamžitě jsem zalitoval, že s sebou nemám foťák. Slunce bylo toho večera nesmírně veliké. Zdálo se mi, že nikdy nebylo větší a obloha nikdy nebyla rudější. Musel jsem si v duchu nadávat. Takový krásný okamžik a já ho nezachytím, zůstane zapomenut. 
-Rudá záře se rozlévala za suchými větvemi stromů, leskla se v kalužích na silnici a jakoby se snažila pohltit všechny budovy. Přál jsem si, aby to udělala. Aby zmizel každý dům a všichni lidé a zůstal jsem jen já a slunce. Na západě i na východě, na severu i jihu, i na úplném vršku oblohy. 
-</>
+form::ER</>
+protg::Magda</>
+text::Zpěv ustal a kazatel se pustil do čtení dalšího úryvku z Bible. Pak přišla Magdina oblíbená část – kázání. Posadila se, vytáhla deník a zapisovala si myšlenky, které ji zaujaly. Kazatel byl velmi dobrý řečník; jeho projev v jejím sešitu snad pokaždé něco zanechal.
+„Jenže vždycky záleží, jak své vlastnosti využijeme. On svou sebejistotu využil špatným způsobem. Ona totiž moc člověka změní – ale málokdy k lepšímu.”
+U té myšlenky se propiska zarazila v půlce věty a Magda stočila oči k Lucii. A tak se podruhé pokusila zaměřit své jistoty a nejistoty na ni.
+Střetly se pohledem a Luciinu tvář ozdobily dva ďolíčky na tvářích.
+Tehdy si Magda uvědomila, že hlavní důvod, proč na bohoslužby dál chodí, je pocit, že ji někdo drží, že úplně všechno bude v pořádku.</>

@@ -4,6 +4,8 @@ from Members import Member
 
 from utils import *
 
+
+# REPLACE NAMES
 def erich_rule_replace_name(word, protg: Protagonist):
     for form in protg.forms:
         if form[0] == word.word:
@@ -20,6 +22,7 @@ def erich_rule_replace_name(word, protg: Protagonist):
     return word.word
 
 
+# REPLACE PREDICATES
 def erich_rule_replace_pred(word, protg: Protagonist):
     tag = word.tag
     if "p3" in tag and ("mI" in tag or "mB" in tag):
@@ -48,6 +51,7 @@ def erich_rule_replace_auxverb(word, protg: Protagonist):
     return word.word
 
 
+# ADD AUXILIARY VERBS
 def erich_rule_add_auxverb(word, protg: Protagonist) -> tuple:
     # word.member == member.pred and "p" not in tag
     if "mA" in word.tag or "mN" in word.tag:
@@ -64,6 +68,7 @@ def erich_rule_add_auxverb(word, protg: Protagonist) -> tuple:
     # kam?
 
 
+# REPLACE PERSONAL PRONOUNS
 def erich_rule_replace_personal_pronouns(word, protg: Protagonist):
     # "xp" and "k3" in word.tag and "p3" in word.tag:
     if protg.name == word.anaphor:
@@ -75,6 +80,7 @@ def erich_rule_replace_personal_pronouns(word, protg: Protagonist):
     return word.word
 
 
+# REPLACE POSSESSIVE PRONOUNS
 def erich_rule_replace_possessive_pronouns():
     # idk if possible with aara
     pass

@@ -1,4 +1,5 @@
 form::ER</>
-protg::Radka</>
-text::Ona Dominika byla vlastně její jediná kamarádka. Nebylo tomu tak vždycky. Když ještě Radka studovala, měla docela hodně kamarádek, přestože se vždycky bavila víc s klukama. Jakmile ale nastoupila na vysokou, snažila se začlenit mezi ostatní holky a velmi rychle pochopila, že přes vlaky tato cesta nevede. Přistoupila tedy na jejich zájmy a koníčky, přizpůsobila se, aby zapadla, předstírala, že čtení knih a nakupování a chození do barů a do kina, že je to pro ni všechno přirozené. Brala to skoro jako další prvácký předmět. A ukázalo se, že byl ze všech předmětů semestru nejtěžší. Ale Radka uspěla. Vždycky, když si něco zamanula, tak to dokázala.
-Ale ne vždy to bylo dobře…</>
+protg::Broněk</>
+text::To už je ale hodně dávno. Odstranila tuhle část své minulosti z hlavy stejným způsobem jako semínko.
+Broněk se jí často snažil vyjít vstříc a nedotknout se skript, než si Radka vezme svůj zelený batoh a vydá se do práce. Vlastně se mu ulevilo, že dnes odpočívá a on se může nerušeně věnovat učení. V patologii se cítil pozadu, jelikož souhrou nešťastných náhod tento semestr vynechal dvě přednášky, takže si dal za cíl to během víkendu dohnat.
+.</>

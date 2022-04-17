@@ -1,6 +1,0 @@
-Metadata: from_form=ER, protagonist=Broněk
-Original: To už je ale hodně dávno. Odstranila tuhle část své minulosti z hlavy stejným způsobem jako semínko.
-Broněk se jí často snažil vyjít vstříc a nedotknout se skript, než si Radka vezme svůj zelený batoh a vydá se do práce. Vlastně se mu ulevilo, že dnes odpočívá a on se může nerušeně věnovat učení. V patologii se cítil pozadu, jelikož souhrou nešťastných náhod tento semestr vynechal dvě přednášky, takže si dal za cíl to během víkendu dohnat.
-.
-Rephrased: To už je ale hodně dávno . Odstranila tuhle část své minulosti z hlavy stejným způsobem jako semínko .
-Broněk se jí často snažil vyjít vstříc a nedotknout se skript , než si Radka vezme svůj zelený batoh a vydá se do práce . Vlastně se mu ulevilo , že dnes odpočívá a on se může nerušeně věnovat učení . V patologii se cítil pozadu , jelikož souhrou nešťastných náhod tento semestr vynechal dvě přednášky , takže si dal za cíl to během víkendu dohnat .

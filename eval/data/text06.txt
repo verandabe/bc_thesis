@@ -1,5 +1,4 @@
-form::ER</>
-protg::Broněk</>
-text::To už je ale hodně dávno. Odstranila tuhle část své minulosti z hlavy stejným způsobem jako semínko.
-Broněk se jí často snažil vyjít vstříc a nedotknout se skript, než si Radka vezme svůj zelený batoh a vydá se do práce. Vlastně se mu ulevilo, že dnes odpočívá a on se může nerušeně věnovat učení. V patologii se cítil pozadu, jelikož souhrou nešťastných náhod tento semestr vynechal dvě přednášky, takže si dal za cíl to během víkendu dohnat.
-.</>
+form::ICH</>
+protg::Gabriel</>
+text::„Děkujeme za doprovod, Tio,“ říká má společnice.
+ “Con piacere,” skloní dívka hlavu a odejde. Vstoupíme do společenské místnosti, která se od zbytku domu značně liší. Zatímco vše, co jsme dosud viděli, bylo v černé a tmavě hnědé, tato místnost je jiná. Zdi jsou v odstínu světle šedé, podlaha je o něco tmavší. Po velké místnosti je roztroušeno několik bílých stolů s tmavými dřevěnými židlemi, jenž sem vůbec nesedí.</>

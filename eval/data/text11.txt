@@ -1,5 +1,6 @@
-form::ER</>
-protg::Lucie</>
-text::Vzpomněla si na tu hodinu během nedělní bohoslužby. Zrovna se zpívalo a Magda se chvěla při znění Luciina hlasu, která seděla vedle ní.
-Lucie byla taky důvod, proč do kostela vůbec začala chodit. Seznámily se na začátku semestru na semináři ústavního práva a Magda na ni od té chvíle nemohla přestat myslet. Ještě ten večer o ní vyprávěla Eduardovi.</>
-
+form::ICH</>
+protg::Sára</>
+text::Utáhnu si čelovku a pomalu našlapuju po ztrouchnivělé podlaze. Starý hotel si zachoval pramálo ze svého někdejšího lesku a slávy - teď vypadá jako obří popelnice s vysokými stropy a skleněnými lustry, pod nimiž leží kaluže střepů.
+Po zdech, na místech, kde je strhaná tapeta, se rozpíná plíseň. Vstupní hala je plná starého nemocničního vybavení, pytlů na odpadky naplněných bůhvíčím, kusy starého nábytku, nasekaného dřevo a několika velkých prázdných barelů.
+Opatrně nakračuju, nohy mám bosé a nerada bych šlápla na střep nebo jiné nebezpečí, které špinavá podlaha Hotelu skrývá. Už takhle budu mít chodidla plná třísek.
+</>
