@@ -17,6 +17,8 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, is
 
     new_tag = tag.replace("xPp1", "p3" + gtag) + "xP"
     new_forms = Morph.get_words("on", new_tag)
+    if not new_forms:
+        return Morph.get_words("já", tag)[0]
 
     if len(new_forms) > 1:
         if member == Member.prep_object:
@@ -25,6 +27,9 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, is
                 return after_prep_forms[0]
 
     first_forms = list(filter(lambda x: x[0] != "n", new_forms))
+    if not first_forms:
+        return new_forms[0]
+
     if gtag != "gF" and isfirst:
         return max(first_forms, key=len)
     return min(first_forms, key=len)

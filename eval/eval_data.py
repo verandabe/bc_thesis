@@ -29,19 +29,20 @@ def read_text_file(filename):
 
 def create_pairs():
     for filename in os.listdir(datadir):
-        if os.path.isfile(datadir+filename):
-            form, protg, text = read_text_file(filename)
+        if 'rephrased_'+filename not in os.listdir(datadir+'rephrased/'):
+            if os.path.isfile(datadir+filename):
+                form, protg, text = read_text_file(filename)
 
-            print('form:', form)
-            print('object form:', Form[form])
-            
-            rerich = RephrasErIch(Form[form])
-            rerich.create_protagonist(protg)
-            rephrased_text = rerich.rephrase(text)
-            
-            with open(datadir+'rephrased/rephrased_' + filename, 'w') as rf:
-                rf.write("Metadata: from_form=" + form + ", protagonist=" + protg + '\n')
-                rf.write("Original: " + text)
-                rf.write("\n")
-                rf.write("Rephrased: " + rephrased_text)
+                print('form:', form)
+                print('object form:', Form[form])
+                
+                rerich = RephrasErIch(Form[form])
+                rerich.create_protagonist(protg)
+                rephrased_text = rerich.rephrase(text)
+                
+                with open(datadir+'rephrased/rephrased_' + filename, 'w') as rf:
+                    rf.write("Metadata: from_form=" + form + ", protagonist=" + protg + '\n')
+                    rf.write("Original: " + text)
+                    rf.write("\n")
+                    rf.write("Rephrased: " + rephrased_text)
             

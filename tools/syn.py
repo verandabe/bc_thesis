@@ -49,6 +49,8 @@ class Syn:
             if t > len(morph_infos) - 1:
                 nodes[n].append(None)
             else:
+                #if(len(nodes) < 2):
+                 #   print("nodes: ", nodes)
                 if morph_infos[t][0] == nodes[n][1]:
                     nodes[n].append(morph_infos[t])
                     t += 1

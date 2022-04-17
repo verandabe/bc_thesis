@@ -25,7 +25,7 @@ class Protagonist:
 
         self.forms_own_loaded = True
         # return self.load_own_forms(poss=poss)
-        return self._create_forms(poss)
+        return self._create_forms()
 
     '''
     def load_own_forms(self, poss=False, file_name=None): # TODO
