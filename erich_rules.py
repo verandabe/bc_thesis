@@ -8,12 +8,12 @@ from utils import *
 # REPLACE NAMES
 def erich_rule_replace_name(word, protg: Protagonist):
     for form in protg.forms:
+        case = get_tag_part(word.tag, "c")
         if form[0] == word.word:
-            skip_name = not decide_use_name(0.4)
+            skip_name = not decide_use_name(0.4) and case == '1'
             if skip_name and word.parent_node.word != "<coord>":
                 return ""
 
-            case = get_tag_part(word.tag, "c")
             new_tag = "k3p1nSc" + str(case) + "xP"
             new_forms = Morph.get_words("já", new_tag)
 
@@ -82,7 +82,7 @@ def erich_rule_replace_personal_pronouns(word, protg: Protagonist):
 
 # REPLACE POSSESSIVE PRONOUNS
 def erich_rule_replace_possessive_pronouns():
-    # idk if possible with aara
+    # not possible with aara :{
     pass
 
 
