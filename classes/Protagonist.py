@@ -27,7 +27,7 @@ class Protagonist:
 
         self.forms_own_loaded = True
 
-        load_or_create = None
+        load_or_create = "g"
         while load_or_create not in "CL":
             load_or_create = input("Forms not generated.\nFor adding forms manually, press C.\nFor loading forms from a file, press L.")
         if load_or_create == "C":
