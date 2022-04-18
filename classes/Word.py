@@ -43,13 +43,18 @@ class Word:
         if self.member == Member.pred or self.member == Member.y:
             self.new_form = icher_rule_replace_predicates(self)
         elif self.member == Member.auxiliary_verb:
-            self.new_form = icher_rule_replace_delete_auxverb(self)
+            if "kY" in self.tag:
+                self.new_form = icher_rule_replace_predicates(self)
+            else:
+                self.new_form = icher_rule_replace_delete_auxverb(self)
         else:
-            if (self.lemma == "já" or self.anaphor == "já") and "p1" in self.tag:
-                first = self.index == 0
-                self.new_form = icher_rule_replace_me_forms(self.tag, self.member, protg, first)
-            elif (self.lemma == "můj" or self.anaphor == "já") and "p1" in self.tag:
-                self.new_form = icher_rule_replace_mine_forms(self.tag, protg)
+            if ((self.lemma == "já" or self.anaphor == "já") \
+                or (self.lemma == "my")) and "p1" in self.tag:
+                    first = self.index == 0
+                    self.new_form = icher_rule_replace_me_forms(self.lemma, self.tag, self.member, protg, first)
+            elif (self.lemma == "můj" or self.lemma == "náš") and "p1" in self.tag:
+                self.new_form = icher_rule_replace_mine_forms(self.lemma, self.tag, protg)
+
 
     def _er_to_ich(self, protg: Protagonist):
         if self.lemma == protg.name or not self.lemma:
@@ -61,7 +66,7 @@ class Word:
                 result_tuple = erich_rule_add_auxverb(self, protg)
                 if not result_tuple[1]:
                     self.new_form = result_tuple[0]
-                elif find_local_subject(self):  # TODO some pravidlo ah idk
+                elif find_local_subject(self):
                     self.new_form = result_tuple[1] + " " + result_tuple[0]
                 else:
                     self.new_form = result_tuple[0] + " " + result_tuple[1]

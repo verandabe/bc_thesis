@@ -7,7 +7,7 @@ from utils import *
 
 
 # REPLACE PERSONAL PRONOUNS
-def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, isfirst: bool):
+def icher_rule_replace_me_forms(lemma, tag: str, member: Member, protg: Protagonist, isfirst: bool):
     gtag = "g" + protg.gender.name
     if decide_use_name():
         case = get_tag_part(tag, "c")
@@ -18,7 +18,7 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, is
     new_tag = tag.replace("xPp1", "p3" + gtag) + "xP"
     new_forms = Morph.get_words("on", new_tag)
     if not new_forms:
-        return Morph.get_words("já", tag)[0]
+        return Morph.get_words(lemma, tag)[0]
 
     if len(new_forms) > 1:
         if member == Member.prep_object:
@@ -36,14 +36,17 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, is
 
 
 # REPLACE POSSESIVE PRONOUNS
-def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
+def icher_rule_replace_mine_forms(lemma: str, tag: str, protg: Protagonist):
     # note: possesives would be replaced by pronouns
 
     if protg.poss_name and decide_use_names():
         pass
 
     new_tag = tag.replace("xOp1", "p3") + "xO"
-    form = "její" if protg.gender == Gender.F else "jeho"
+    if lemma == "můj":
+        form = "její" if protg.gender == Gender.F else "jeho"
+    elif lemma == "náš":
+        form = "jejich"
 
     new_forms = Morph.get_words(form, new_tag)
     if new_forms:
@@ -54,10 +57,12 @@ def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
 # REPLACE VERBS IN PRESENT TENSE AND CONDITIONALS, CONJUNCTIONS
 def icher_rule_replace_predicates(word):
     tag = word.tag
-    if "p1" in tag and ("mI" in tag or "mB" in tag or "mC" in tag):
+
+    if "p1" in tag and (("mI" in tag or "mB" in tag) or "mC" in tag):
+        tag = tag.replace('p1', 'p3')
         new_forms = generate_new_forms(word.lemma, tag)
         if new_forms:
-            return new_forms[0]  # todo?
+            return new_forms[0]
     # other cases
     return word.word
 
@@ -69,9 +74,10 @@ def icher_rule_replace_delete_auxverb(word):
         return word.word
     if word.parent_node and word.parent_node.member == Member.pred:
         return ''
+    tag = tag.replace('p1', 'p3')
     new_forms = generate_new_forms(word.lemma, tag)
     if new_forms:
-        return new_forms[0]  # todo?
+        return new_forms[0]
     return word.word
 
 

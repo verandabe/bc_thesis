@@ -15,14 +15,14 @@ from syn import Syn
 
 from eval_data import *
 
-#create_pairs()
+create_pairs()
 
-
-text = "Moje máma si vždycky myslela, že můj táta má rád psy."
+'''
+text = "Budu řvát bolestí, ale naše máma mi to zakázala."
 
 rerich = RephrasErIch(Form.ICH)
 rerich.create_protagonist("Adam")
 print(rerich.rephrase(text))
-
+#'''
 
 
