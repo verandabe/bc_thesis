@@ -42,6 +42,6 @@ class RephrasErIch:
     def set_form(self, from_form: Form):
         self.form = from_form
 
-    def create_protagonist(self, name: str):
-        self.protg = Protagonist(name)
+    def create_protagonist(self, name: str, poss_name=None):
+        self.protg = Protagonist(name, poss_name)
 

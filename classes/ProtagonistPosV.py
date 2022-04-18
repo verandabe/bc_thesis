@@ -12,6 +12,7 @@ class Protagonist:
         self.name = name
         self.poss_name = poss_name
         self.forms = self._try_generate_forms(poss=False)
+        self.poss_forms = self._try_generate_forms(poss=True) if poss_name else []
         self.gender = self._get_gender()
         self.forms_own_loaded = False
 
@@ -20,18 +21,21 @@ class Protagonist:
         Tries to generate forms of the protagonist's name if majka can decline it.
         Otherwise, returns calling of load_own_forms method.
         """
-        generated = Morph.get_wt(self.name)
+        if poss and poss_name:
+            generated = Morph.get_wt(self.poss_name)
+        else:
+            generated = Morph.get_wt(self.name)
 
         if generated:
             return list(filter(lambda f: "nS" in f[1], generated))
 
         self.forms_own_loaded = True
 
-        load_or_create = None
+        load_or_create = None if not poss_name else "L"
         while load_or_create not in "CL":
             load_or_create = input("Forms not generated.\nFor adding forms manually, press C.\nFor loading forms from a file, press L.")
         if load_or_create == "C":
-            return self._create_forms()
+            return self._create_forms(poss)
 
         filename = input("Enter name of the file with forms: ")
         return load_own_forms(self, filename)
@@ -57,7 +61,7 @@ class Protagonist:
 
         return forms
 
-    def _create_forms(self):
+    def _create_forms(self, poss=False):
         """
         Loads protagonist name's forms and tags as user input.
         """

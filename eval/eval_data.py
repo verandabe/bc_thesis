@@ -20,29 +20,35 @@ def read_text_file(filename):
     with open(datadir+filename, 'r') as tf:
         info = tf.read()
         info = info.split('</>\n')
-        for i in range(3):
-            info[i] = info[i].split('::')[1]
-        form, protg, text = info[0], info[1], info[2]
 
-    return (form, protg, text)
+        rang = 3
+        if len(info) > 3 and "posspr::" in info[3]: rang += 1
+
+        for i in range(rang):
+            info[i] = info[i].split('::')[1]
+
+        if rang > 3:
+            form, protg, text, posspr = info[0], info[1], info[2], info[3]
+        else:
+            form, protg, text, posspr = info[0], info[1], info[2], None
+
+    return (form, protg, text, posspr)
 
 
 def create_pairs():
     for filename in os.listdir(datadir):
         if 'rephrased_'+filename not in os.listdir(datadir+'rephrased/'):
             if os.path.isfile(datadir+filename):
-                form, protg, text = read_text_file(filename)
+                form, protg, text, posspr = read_text_file(filename)
 
-                print('form:', form)
-                print('object form:', Form[form])
-                
                 rerich = RephrasErIch(Form[form])
-                rerich.create_protagonist(protg)
+
+                rerich.create_protagonist(protg, posspr)
                 rephrased_text = rerich.rephrase(text)
-                
+
                 with open(datadir+'rephrased/rephrased_' + filename, 'w') as rf:
                     rf.write("Metadata: from_form=" + form + ", protagonist=" + protg + '\n')
                     rf.write("Original: " + text)
                     rf.write("\n")
                     rf.write("Rephrased: " + rephrased_text)
-            
+

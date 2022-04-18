@@ -15,13 +15,14 @@ from syn import Syn
 
 from eval_data import *
 
-create_pairs()
+#create_pairs()
 
-'''
-text = "„Děkujeme za doprovod, Tio,“ říká má společnice.\n “Con piacere,” skloní dívka hlavu a odejde. Vstoupíme do společenské místnosti, která se od zbytku domu značně liší. Zatímco vše, co jsme dosud viděli, bylo v černé a tmavě hnědé, tato místnost je jiná. Zdi jsou v odstínu světle šedé, podlaha je o něco tmavší. Po velké místnosti je roztroušeno několik bílých stolů s tmavými dřevěnými židlemi, jenž sem vůbec nesedí."
+
+text = "Moje máma si vždycky myslela, že můj táta má rád psy."
+
 rerich = RephrasErIch(Form.ICH)
-rerich.create_protagonist("Martin")
+rerich.create_protagonist("Adam")
 print(rerich.rephrase(text))
-'''
+
 
 

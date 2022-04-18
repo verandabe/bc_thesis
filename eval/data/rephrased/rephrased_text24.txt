@@ -1,9 +1,0 @@
-Metadata: from_form=ER, protagonist=Královna
-Original: „Králi Lipsi, temná síla na jihu Frakturnu neustále postupuje.“ Její hlas se při těchto slovech nepatrně třásl. Přesto, že se královna snažila být oporou pro svého muže, nedokázala skrýt svůj strach z událostí dějících se na jihu její země.
-   „Ano, já vím Qvelie.“ Lips, statný elf a rozený vůdce poznal na své ženě obavy.
-   „Už nemůžeme dále čekat. Musíme ho pro ni neprodleně poslat.“ Drobná sněhobílá ruka mu stanula na rameni a on věděl, že má jednat. Mávnutím ruky naznačil strážím aby přistoupili.
-   „Pošlete sem Arma.“ Oba přikývli a s poklonou se vzdálili. Král a královna osaměli.
-Rephrased: „Králi Lipsi,  temná síla na jihu Frakturnu neustále postupuje.“ Její hlas se při těchto slovech nepatrně třásl. Přesto, že se královna snažila být oporou pro svého muže, nedokázala skrýt svůj strach z událostí dějících se na jihu její země.
-„Ano,  já vím Qvelie.“ Lips, statný elf a rozený vůdce poznal na své ženě obavy.
-„Už nemůžeme dále čekat.  Musíme ho pro ni neprodleně poslat.“ Drobná sněhobílá ruka mu stanula na rameni a on věděl, že má jednat. Mávnutím ruky naznačil strážím aby přistoupili.
-„Pošlete sem Arma.“ Oba přikývli a s poklonou se vzdálili. Král a královna osaměli.

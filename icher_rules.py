@@ -37,9 +37,13 @@ def icher_rule_replace_me_forms(tag: str, member: Member, protg: Protagonist, is
 
 # REPLACE POSSESIVE PRONOUNS
 def icher_rule_replace_mine_forms(tag: str, protg: Protagonist):
+    if protg.poss_name and decide_use_names():
+        pass
+
     new_tag = tag.replace("xOp1", "p3") + "xO"
     form = "její" if protg.gender == Gender.F else "jeho"
     # TODO načítání i přivlastnovaci tvary jmena? zatim nahrazovat zajmenem
+
     new_forms = Morph.get_words(form, new_tag)
     if new_forms:
         return new_forms[0]
