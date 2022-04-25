@@ -72,12 +72,15 @@ def icher_rule_replace_delete_auxverb(word):
     tag = word.tag
     if "p1" not in tag:
         return word.word
-    if word.parent_node and word.parent_node.member == Member.pred:
-        return ''
-    tag = tag.replace('p1', 'p3')
-    new_forms = generate_new_forms(word.lemma, tag)
-    if new_forms:
-        return new_forms[0]
+    parent_mode = get_tag_part(word.parent_node.tag, "m")
+    if "mI" in word.tag:
+        if word.parent_node and parent_mode == "A":
+            return ''
+        elif word.parent_node and patent_mode == "N":
+            tag = tag.replace('p1', 'p3')
+            new_forms = generate_new_forms(word.lemma, tag)
+            if new_forms:
+                return new_forms[0]
     return word.word
 
 

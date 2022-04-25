@@ -85,6 +85,9 @@ def erich_rule_replace_possessive_pronouns():
     # not possible with aara :{
     pass
 
+def erich_rule_replace_conjunctions():
+    pass
+
 
 def find_pred_ancestor(word):
     current_ancestor = word.parent_node
