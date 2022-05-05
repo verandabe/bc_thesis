@@ -57,7 +57,7 @@ class Word:
 
 
     def _er_to_ich(self, protg: Protagonist):
-        if self.lemma == protg.name or not self.lemma:
+        if self.lemma == protg.name or not self.lemma or self.anaphor == protg.name:
             self.new_form = erich_rule_replace_name(self, protg)
         if self.member == Member.pred:
             if "p3" in self.tag:

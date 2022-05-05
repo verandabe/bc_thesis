@@ -9,7 +9,7 @@ from utils import *
 def erich_rule_replace_name(word, protg: Protagonist):
     for form in protg.forms:
         case = get_tag_part(word.tag, "c")
-        if form[0] == word.word:
+        if form[0] == word.word or form[0] == word.anaphor:
             skip_name = not decide_use_name(0.4) and case == '1'
             if skip_name and word.parent_node.word != "<coord>":
                 return ""
