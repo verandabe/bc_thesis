@@ -49,39 +49,7 @@ class Syn:
             if t > len(morph_infos) - 1:
                 nodes[n].append(None)
             else:
-                #if(len(nodes) < 2):
-                 #   print("nodes: ", nodes)
                 if morph_infos[t][0] == nodes[n][1]:
                     nodes[n].append(morph_infos[t])
                     t += 1
-
-
-    '''
-    @staticmethod
-    def _generate_vertical(sentence: str) -> str:
-        """
-        Generate a vertical file for given sentence to be used as SET input.
-        :param sentence: string, sentence to transform to vertical data
-        :return: name of a file where the vertical data is written
-        """
-
-        words = sentence.split()  # TODO sentence segmention
-
-        with open("tmp/sentence_input.txt", "w") as f:
-            for word in words:
-                f.write(word)
-                f.write('\t')
-                lts = Morph.get_lt(word)
-                for tup in lts:
-                    f.write(tup[0] + ',')
-                f.write('\t')
-                for tup in lts:
-                    f.write(tup[1] + ',')
-                f.write('\n')
-
-            filename = f.name
-
-        return filename
-
-    '''
 

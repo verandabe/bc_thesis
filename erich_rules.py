@@ -63,7 +63,8 @@ def erich_rule_add_auxverb(word, protg: Protagonist) -> tuple:
             or word.unex_subject == protg.name:
                 number = get_tag_part(word.tag, "n")
                 aux_verb_form = "jsem" if number == "S" else "jsme"
-                return (word.word, aux_verb_form)
+                if not erich_rule_replace_conjs(word):
+                    return (word.word, aux_verb_form)
     return (word.word, None)
     # kam?
 
@@ -80,6 +81,18 @@ def erich_rule_replace_personal_pronouns(word, protg: Protagonist):
     return word.word
 
 
+# REPLACE CONJUNCTIONS
+def erich_rule_replace_conjs(word) -> bool:
+    clause = find_clause_ancestor(word)
+    for dep in clause.dependents:
+        if dep.lemma == "aby" or dep.lemma == "kdyby":
+            new_tag = dep.tag.replace("p3", "p1")
+            new_forms = Morph.get_words(dep.lemma, new_tag)
+            dep.new_form = new_forms[0]
+            return True
+    return False
+
+
 # REPLACE POSSESSIVE PRONOUNS
 def erich_rule_replace_possessive_pronouns():
     # not possible with aara :{
@@ -91,6 +104,13 @@ def find_pred_ancestor(word):
     if current_ancestor.member == Member.pred or current_ancestor.member == Member.clause:
         return current_ancestor
     return find_pred_ancestor(current_ancestor)
+
+
+def find_clause_ancestor(word):
+    current_ancestor = word.parent_node
+    if current_ancestor.word == "<clause>":
+        return current_ancestor
+    return find_clause_ancestor(current_ancestor)
 
 
 def find_local_subject(root):
@@ -112,4 +132,5 @@ def protg_in_coord(coord, protg):
         if dep.word == protg.name:
             return dep
     return coord
+
 

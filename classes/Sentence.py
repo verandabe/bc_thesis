@@ -121,6 +121,9 @@ class Sentence:
                 continue
             word.generate_new_form(form, self.protg)
 
+        for word in self.words:
+            if not word.is_real_word():
+                continue
             if first and word.new_form:
                 first = False
                 word.new_form = word.new_form[0].upper() + word.new_form[1:]
@@ -131,6 +134,7 @@ class Sentence:
                     names_considered = False
             else:
                 new_forms.append(word.new_form)
+
         self.new_sentence = " ".join(new_forms)
 
     def _deal_with_names(self, word, new_forms, first) -> bool:
