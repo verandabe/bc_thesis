@@ -18,7 +18,7 @@ from eval_data import *
 #create_pairs()
 
 
-text = "Petr chce, aby máma a táta plakali."
+text = "Petr chce, aby máma plakala."
 
 rerich = RephrasErIch(Form.ER)
 rerich.create_protagonist("máma")
