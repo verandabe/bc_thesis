@@ -2,12 +2,15 @@ import os
 import re
 
 SET_JSON_PATH = "../set_json.py"
-AARA_PATH = "../aara5.py"
+AARA_PATH = "../aara-rerich.py"
 DESAMB_PATH = "/corpora/programy/desamb.utf8.majka.sh"
 UNITOK_PATH = "/corpora/programy/unitok.py.czech"
 SET_PATH = "/nlp/projekty/set/set/set.py --marx"
 
 class Anaph:
+    """
+    Class providing the usage of Aara, anaphora resolver.
+    """
 
     aara_command = "echo {text} | " + UNITOK_PATH + " | " + DESAMB_PATH + " | " + SET_PATH + " | " + SET_JSON_PATH + " | " + AARA_PATH
 

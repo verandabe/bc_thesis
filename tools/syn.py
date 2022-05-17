@@ -12,7 +12,6 @@ class Syn:
     Class providing the usage of SET, syntactic analyzer.
     """
 
-    # command = SET_PATH + "set.py {options} {filename}"
     command = "echo {sentence} | " + UNITOK_PATH + " | " + DESAMB_PATH + " | " + SET_PATH
     des_command = "echo {sentence} | " + UNITOK_PATH + " | " + DESAMB_PATH
 

@@ -3,12 +3,11 @@ from typing import List, Dict
 from Forms import Form
 from Members import Member
 from syn import Syn
-from morph import Morph
 
-from Protagonist import Protagonist
 from Word import Word
 from icher_rules import *
 from erich_rules import *
+
 
 class Sentence:
     """
@@ -33,8 +32,7 @@ class Sentence:
         for node in self.nodes:
             index, word_form, parent_idx, _, member, _, wlt = node
             anaphor = None
-            #if word_form.lower() in self.anaphors:
-            #    anaphor = self.anaphors[word_form.lower()]
+
             anaphor = None
             word = Word(int(index),
                         word_form,
@@ -51,8 +49,10 @@ class Sentence:
                 word.anaphor = self.anaphors[word.lemma]
             words.append(word)
 
-            if word_form == "„": ds = True
-            elif word_form == "“": ds = False
+            if word_form == "„":
+                ds = True
+            elif word_form == "“":
+                ds = False
 
         self._add_dependencies(words)
         self._add_unexpressed_subject(words)
@@ -68,12 +68,18 @@ class Sentence:
             words[dep_idx].dependents.append(words[i])
 
     def _add_parents(self) -> None:
+        """
+        Finds a parent node for each word of the sentence.
+        """
         for word in self.words:
             if word.parent_idx == -1:
                 continue
             word.parent_node = self.words[word.parent_idx]
 
-    def _add_unexpressed_subject(self, words: List[Word]):
+    def _add_unexpressed_subject(self, words: List[Word]) -> None:
+        """
+        Method finds out if the subject is unexpressed and adds an anaphor as subject, if any.
+        """
         if "_" not in self.anaphors:
             return
         for word in words:
@@ -81,7 +87,6 @@ class Sentence:
                 if find_local_subject(word):
                     return
                 word.unex_subject = self.anaphors["_"]
-
 
     def _find_root(self) -> Word:
         """
@@ -112,7 +117,10 @@ class Sentence:
             return Member(word.member)
         return Member.other
 
-    def rephrase(self, form: Form):
+    def rephrase(self, form: Form) -> None:
+        """
+        Method takes Form as an argument and rephrases the sentence from this form to the other.
+        """
         new_forms = []
         first = True
         names_considered = True
@@ -158,4 +166,3 @@ class Sentence:
                 if self.protg.name not in [word_str for word_str in self.words]:
                     return -1 if in_front else 1
         return 0
-

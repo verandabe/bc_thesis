@@ -39,9 +39,9 @@ class RephrasErIch:
         rephrased_text = "\n".join(rephrased_list)
         return rephrased_text
 
-    def set_form(self, from_form: Form):
+    def set_form(self, from_form: Form) -> None:
         self.form = from_form
 
-    def create_protagonist(self, name: str, poss_name=None):
-        self.protg = Protagonist(name, poss_name)
+    def create_protagonist(self, name: str) -> None:
+        self.protg = Protagonist(name)
 

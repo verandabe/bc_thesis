@@ -7,7 +7,7 @@ from utils import *
 
 
 # REPLACE PERSONAL PRONOUNS
-def icher_rule_replace_me_forms(lemma, tag: str, member: Member, protg: Protagonist, isfirst: bool):
+def icher_rule_replace_me_forms(lemma, tag: str, member: Member, protg: Protagonist, isfirst: bool) -> str:
     gtag = "g" + protg.gender.name
     if decide_use_name():
         case = get_tag_part(tag, "c")
@@ -36,7 +36,7 @@ def icher_rule_replace_me_forms(lemma, tag: str, member: Member, protg: Protagon
 
 
 # REPLACE POSSESIVE PRONOUNS
-def icher_rule_replace_mine_forms(lemma: str, tag: str, protg: Protagonist):
+def icher_rule_replace_mine_forms(lemma: str, tag: str, protg: Protagonist) -> str:
     # note: possesives would be replaced by pronouns
 
     if protg.poss_name and decide_use_names():
@@ -55,7 +55,7 @@ def icher_rule_replace_mine_forms(lemma: str, tag: str, protg: Protagonist):
 
 
 # REPLACE VERBS IN PRESENT TENSE AND CONDITIONALS, CONJUNCTIONS
-def icher_rule_replace_predicates(word):
+def icher_rule_replace_predicates(word) -> str:
     tag = word.tag
 
     if "p1" in tag and (("mI" in tag or "mB" in tag) or "mC" in tag):
@@ -68,7 +68,7 @@ def icher_rule_replace_predicates(word):
 
 
 # REPLACE or DELETE AUXILIARY VERBS
-def icher_rule_replace_delete_auxverb(word):
+def icher_rule_replace_delete_auxverb(word) -> str:
     tag = word.tag
     if "p1" not in tag:
         return word.word

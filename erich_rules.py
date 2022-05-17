@@ -23,7 +23,7 @@ def erich_rule_replace_name(word, protg: Protagonist):
 
 
 # REPLACE PREDICATES
-def erich_rule_replace_pred(word, protg: Protagonist):
+def erich_rule_replace_pred(word, protg: Protagonist) -> str:
     tag = word.tag
     if "p3" in tag and ("mI" in tag or "mB" in tag):
         subject = find_local_subject(word)
@@ -32,12 +32,12 @@ def erich_rule_replace_pred(word, protg: Protagonist):
             new_tag = tag.replace("p3", "p1")
             new_forms = Morph.get_words(word.lemma, new_tag)
             if new_forms:
-                return new_forms[0]  # todo?
+                return new_forms[0]
     return word.word
 
 
 # REPLACE CONDITIONAL FORMS
-def erich_rule_replace_auxverb(word, protg: Protagonist):
+def erich_rule_replace_auxverb(word, protg: Protagonist) -> str:
     # word.member == Member.auxiliary_verb and "p3" in word.tag:
     pred_ancestor = find_pred_ancestor(word)
     subject = find_local_subject(pred_ancestor)
@@ -66,11 +66,10 @@ def erich_rule_add_auxverb(word, protg: Protagonist) -> tuple:
                 if not erich_rule_replace_conjs(word):
                     return (word.word, aux_verb_form)
     return (word.word, None)
-    # kam?
 
 
 # REPLACE PERSONAL PRONOUNS
-def erich_rule_replace_personal_pronouns(word, protg: Protagonist):
+def erich_rule_replace_personal_pronouns(word, protg: Protagonist) -> str:
     # "xp" and "k3" in word.tag and "p3" in word.tag:
     if protg.name == word.anaphor:
         tag = word.tag
@@ -98,25 +97,22 @@ def erich_rule_replace_possessive_pronouns():
     # not possible with aara :{
     pass
 
-def erich_rule_replace_conjunctions():
-    pass
 
-
-def find_pred_ancestor(word):
+def find_pred_ancestor(word) -> object:
     current_ancestor = word.parent_node
     if current_ancestor.member == Member.pred or current_ancestor.member == Member.clause:
         return current_ancestor
     return find_pred_ancestor(current_ancestor)
 
 
-def find_clause_ancestor(word):
+def find_clause_ancestor(word) -> object:
     current_ancestor = word.parent_node
     if current_ancestor.word == "<clause>":
         return current_ancestor
     return find_clause_ancestor(current_ancestor)
 
 
-def find_local_subject(root):
+def find_local_subject(root) -> object:
     for offspring in root.dependents:
         if is_subject(offspring):
             return offspring
@@ -126,11 +122,11 @@ def find_local_subject(root):
     return None
 
 
-def is_subject(word):
+def is_subject(word) -> bool:
     return word.member == Member.subject or word.member == Member.subject_bad
 
 
-def protg_in_coord(coord, protg):
+def protg_in_coord(coord, protg) -> object:
     for dep in coord.dependents:
         if dep.word == protg.name:
             return dep

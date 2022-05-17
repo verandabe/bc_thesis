@@ -16,7 +16,7 @@ def get_tag_part(tag: str, category: str) -> str:
             return tag[letter_idx + 1]
 
 
-def postprocess(rephrased):
+def postprocess(rephrased) -> List[str]:
     postprocessed = []
     for p in range(len(rephrased)):
         ds_postpo = re.sub('_', ' ', rephrased[p])

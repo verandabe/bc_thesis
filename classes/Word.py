@@ -2,7 +2,6 @@ from Forms import Form
 from Members import Member
 from icher_rules import *
 from erich_rules import *
-from morph import Morph
 
 from Protagonist import Protagonist
 
@@ -21,12 +20,12 @@ class Word:
         self.parent_idx = parent_idx
         self.parent_node = None
         self.dependents = dependents
-        self.new_form = string#+"_new"  # TODO delete after testing
+        self.new_form = string
         self.anaphor = anaphor
         self.direct_speech = ds
         self.unex_subject = None  # Only for predicates
 
-    def generate_new_form(self, form: Form, protg: Protagonist):
+    def generate_new_form(self, form: Form, protg: Protagonist) -> None:
         if self.direct_speech:
             self.process_direct_speech()
 
@@ -39,7 +38,7 @@ class Word:
     def is_real_word(self) -> bool:
         return "<" not in self.word
 
-    def _ich_to_er(self, protg: Protagonist):
+    def _ich_to_er(self, protg: Protagonist) -> None:
         if self.member == Member.pred or self.member == Member.y:
             self.new_form = icher_rule_replace_predicates(self)
         elif self.member == Member.auxiliary_verb:
@@ -48,15 +47,13 @@ class Word:
             else:
                 self.new_form = icher_rule_replace_delete_auxverb(self)
         else:
-            if ((self.lemma == "já" or self.anaphor == "já") \
-                or (self.lemma == "my")) and "p1" in self.tag:
-                    first = self.index == 0
-                    self.new_form = icher_rule_replace_me_forms(self.lemma, self.tag, self.member, protg, first)
+            if ((self.lemma == "já" or self.anaphor == "já") or (self.lemma == "my")) and "p1" in self.tag:
+                first = self.index == 0
+                self.new_form = icher_rule_replace_me_forms(self.lemma, self.tag, self.member, protg, first)
             elif (self.lemma == "můj" or self.lemma == "náš") and "p1" in self.tag:
                 self.new_form = icher_rule_replace_mine_forms(self.lemma, self.tag, protg)
 
-
-    def _er_to_ich(self, protg: Protagonist):
+    def _er_to_ich(self, protg: Protagonist) -> None:
         if self.lemma == protg.name or not self.lemma or self.anaphor == protg.name:
             self.new_form = erich_rule_replace_name(self, protg)
         if self.member == Member.pred:
@@ -75,6 +72,5 @@ class Word:
         elif "k3" in self.tag and "xP" in self.tag and "p3" in self.tag:
             self.new_form = erich_rule_replace_personal_pronouns(self, protg)
 
-    def process_direct_speech(self):
+    def process_direct_speech(self) -> None:
         self.new_form = self.word.replace('_', ' ')
-

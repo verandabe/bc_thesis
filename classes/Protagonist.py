@@ -1,6 +1,7 @@
 from Genders import Gender
 from morph import Morph
 from utils import *
+from typing import List, Tuple
 
 
 class Protagonist:
@@ -8,14 +9,13 @@ class Protagonist:
     Represents a Protagonist of a text being converted
     """
 
-    def __init__(self, name: str, poss_name=None):
+    def __init__(self, name: str):
         self.name = name
-        self.poss_name = poss_name
-        self.forms = self._try_generate_forms(poss=False)
+        self.forms = self._try_generate_forms()
         self.gender = self._get_gender()
         self.forms_own_loaded = False
 
-    def _try_generate_forms(self, poss=False):
+    def _try_generate_forms(self) -> list:
         """
         Tries to generate forms of the protagonist's name if majka can decline it.
         Otherwise, returns calling of load_own_forms method.
@@ -37,13 +37,11 @@ class Protagonist:
         return load_own_forms(self, filename)
 
 
-    def load_own_forms(self, file_name=None):
+    def load_own_forms(self, file_name=None) -> list:
         """
         Loads the forms of protagonist's name from a given file in form "lemma tag\n"
         If file_name not given, returns calling of _create_forms method.
         """
-        # nacti rucne vysklonovane jmeno, kdyz majka nezvladne
-        # file ve formatu: ```lemma tag\n```
 
         if file_name is None:
             return self._create_forms()
@@ -57,7 +55,7 @@ class Protagonist:
 
         return forms
 
-    def _create_forms(self):
+    def _create_forms(self) -> List[Tuple[str, str]]:
         """
         Loads protagonist name's forms and tags as user input.
         """
@@ -76,17 +74,9 @@ class Protagonist:
 
         return declined_forms
 
-    def _get_gender(self):
+    def _get_gender(self) -> Gender:
         for form in self.forms:
             tag = form[1]
             g = get_tag_part(tag, "g")
             return Gender(g)
-        return Gender.MASC  # default gender i guess
-
-
-
-
-
-
-
-
+        return Gender.M  # default gender

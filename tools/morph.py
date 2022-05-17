@@ -7,7 +7,7 @@ MAJKA_DATA_PATH = '../majka/data/'
 
 class Morph:
     """
-        Class providing the usage of Majka, morphological analyzer.
+    Class providing the usage of Majka, morphological analyzer.
     """
 
     command = 'echo "{word}" | ' + MAJKA_PATH + 'majk -f ' + MAJKA_DATA_PATH + '{data_file}'

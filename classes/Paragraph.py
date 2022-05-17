@@ -35,7 +35,7 @@ class Paragraph:
             object_sentences.append(sentence)
         return object_sentences
 
-    def preprocess_direct_speech(self, text):
+    def preprocess_direct_speech(self, text) -> str:
         pattern = r'[„][^„“]*[“]'
 
         def direct_repl(matchobj):
@@ -44,5 +44,3 @@ class Paragraph:
 
         prepared_par = re.sub(pattern, direct_repl, text)
         return prepared_par
-
-
